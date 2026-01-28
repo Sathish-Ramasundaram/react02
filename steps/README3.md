@@ -1,9 +1,9 @@
-- downgrade to tailwind v3 (stable) (48)
+- **B1** Downgrade to Tailwind v3 (stable)  
 npm uninstall tailwindcss @tailwindcss/postcss
 npm install -D tailwindcss@3.4.17 postcss autoprefixer
 
-- open and paste this code (29)
-- make sure tailwind.config.js looks like below (50)
+- **B2** Open and paste code  
+- **B3** Ensure `tailwind.config.js` is correct  
 ```
 module.exports = {
   content: [
@@ -17,12 +17,12 @@ module.exports = {
 };
 ```
 
-type nul > postcss.config.js
-- this create the file (30)
 
-- paste the below code (31)
-- replace entire file of postcss.config.js (49)
-``
+- **B4** Create `postcss.config.js` file  
+type nul > postcss.config.js
+
+- **B5** Paste code into `postcss.config.js`  
+```
 module.exports = {
   plugins: {
     tailwindcss: {},
@@ -31,10 +31,9 @@ module.exports = {
 };
 ```
 
-type nul > src\index.css
-- to open the file (32)
+- **B6** Create `src/index.css` file  
 
-- paste the below case (33)
+- **B7** Paste Tailwind directives into `index.css`  
 ```
 @tailwind base;
 @tailwind components;
@@ -46,14 +45,13 @@ Injects base styles + CSS reset
 Injects pre-built component styles 
 Injects utility classes 
 
-- update index.tsx (34)
+- **B8** Update `index.tsx` to import CSS  
 import "./index.css";
 
+- **B9** Install CSS loader dependencies  
 npm install -D style-loader css-loader postcss-loader
-- install css loader (35)
 
-- update rspak.config.js (36)
-
+- **B10** Update `rspack.config.js` rules  
 existing module: rules propably look like this
 ```
 module: {
@@ -120,11 +118,10 @@ module: {
   ],
 },
 ```
-
+- **B11** Install Tailwind PostCSS plugin  
 npm install -D @tailwindcss/postcss
-- install new tailwind Postcss plugin (37)
 
-- update App.tsx (temporarily) - (38)
+- **B12** Update `App.tsx` temporarily to test Tailwind
 
 ```
 function App() {

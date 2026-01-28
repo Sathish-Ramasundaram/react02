@@ -1,114 +1,184 @@
-mkdir react02
-- to open the project folder (1)
+# React02 – Auth Flow Learning Project
 
-cd react02
-- To go inside the project folder (2)
+A hands-on learning project built **from scratch** using **React + TypeScript + Rspack + Tailwind CSS**.
 
-code .
-- VS Code is open in a new window (3)
+This project focuses on **fundamentals-first React learning** by implementing a real-world authentication flow:
 
-shift + ctrl + `
-- shortcut to open the integrated terminal in VS Code. (4)
+* Login
+* Register
+* Forgot Password
+* Dashboard (base)
 
-npm init -y 
-- is for initializing a Node.js project. (5)
+The goal is not just UI, but **understanding how React actually works**: routing, state, forms, validation, accessibility, and architecture.
 
-npm install react react-dom  
-- installs the core React libraries. (6)
+---
 
-npm install -D @rspack/core @rspack/cli @rspack/dev-server @rspack/plugin-react-refresh react-refresh @rspack/plugin-html
-- Rspack setup  (7)
-Bundler (Rspack) → ready
-Dev server → ready
-Fast refresh → ready
-HTML injection → ready 
+## 🚀 Tech Stack
 
-npm install -D typescript @types/react @types/react-dom
-- for TypeScript + React typing layer. (8)
+* **React (Function Components)**
+* **TypeScript**
+* **Rspack** (custom bundler setup)
+* **Tailwind CSS (v3)**
+* **React Router DOM**
 
-mkdir public 
-- to open folder (9)
+---
 
-mkdir src
-- to open folder (10)
-
-type nul > public\index.html
-- to open file inside public folder (11)
-
-type nul > src\index.tsx
-- to open file inside src folder (12)
-
-type nul > rspack.config.js
-- to open the file in root (13)
-
-paste the code below inside rspack.config.js (14)
+## 📂 Project Structure
 
 ```
-const path = require('path');
-const HtmlRspackPlugin = require('@rspack/plugin-html').default;
-
-module.exports = {
-  entry: './src/index.tsx',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/',
-  },
-  resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
-  },
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: {
-          loader: 'builtin:swc-loader',
-          options: {
-            jsc: {
-              parser: {
-                syntax: 'typescript',
-                tsx: true,
-              },
-              transform: {
-                react: {
-                  runtime: 'automatic',
-                },
-              },
-            },
-          },
-        },
-      },
-    ],
-  },
-  plugins: [
-    new HtmlRspackPlugin({
-      template: './public/index.html',
-    }),
-  ],
-  devServer: {
-    port: 3000,
-  },
-};
-
+src/
+ ├── pages/
+ │   ├── Login.tsx
+ │   ├── Register.tsx
+ │   ├── ForgotPassword.tsx
+ │   └── Dashboard.tsx
+ │
+ ├── context/
+ │   └── AuthContext.tsx
+ │
+ ├── App.tsx
+ ├── index.tsx
+ └── index.css
 ```
 
-Open package.json and update scripts to below one: (15)
+---
 
-  "scripts": {
-    "start": "rspack serve",
-    "build": "rspack build"
-  },
+## 🧭 Application Flow
 
-- update package.json script (23)
+1. **Login Page** (`/`)
 
-"scripts": {
-  "dev": "rspack serve",
-  "build": "rspack build"
-}
+   * Email + Password form
+   * Controlled inputs
+   * Basic validation
+   * Navigation links
 
-Not mandatory, but recommended.
-Why?
-start is conventionally used by CRA
-dev is clearer for custom setups
-Avoids confusion later when explaining
+2. **Register Page** (`/register`)
 
+   * Email, Password, Confirm Password
+   * Controlled inputs
+   * Password match validation
+   * Navigation back to Login
+
+3. **Forgot Password Page** (`/forgot-password`)
+
+   * Email input
+   * Controlled form
+   * Back to Login navigation
+
+4. **Dashboard Page** (`/dashboard`)
+
+   * Base page ready for auth protection
+
+---
+
+## 🎯 React Concepts Covered
+
+### Core React
+
+* Component-based architecture
+* JSX syntax (vs HTML)
+* Functional components
+* Hooks-first approach
+* `useState`
+
+### Forms & Events
+
+* Controlled components
+* Synthetic events
+* `onSubmit`, `onChange`
+* `preventDefault`
+* Form validation
+
+### Routing
+
+* Client-side routing
+* `BrowserRouter`, `Routes`, `Route`
+* Navigation with `Link`
+* Multiple page flow
+
+### Architecture
+
+* Context API (AuthContext)
+* Provider pattern
+* Children props
+* App-level wrapping
+
+### Accessibility
+
+* Semantic HTML (`form`, `label`, `button`)
+* Keyboard submit (Enter key)
+
+---
+
+## 🎨 Tailwind CSS Concepts Used
+
+* Utility-first styling
+* Layout (`flex`, `min-h-screen`, `justify-center`)
+* Typography (`text-xl`, `font-bold`)
+* Spacing (`p-6`, `mb-4`)
+* Colors (`text-blue-600`, `bg-gray-100`)
+* Forms & buttons styling
+
+---
+
+## ▶️ How to Run the Project
+
+```bash
+npm install
+npm run dev
+```
+
+Open: [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 🧪 Project Demonstration Guide (Step-by-Step)
+
+### 1️⃣ Login Page
+
+* Open `/`
+* Try submitting empty form → see validation
+* Enter email + password → success logs
+* Navigate to Register / Forgot Password
+
+### 2️⃣ Forgot Password
+
+* Enter email
+* Submit without page refresh
+* Navigate back to Login
+
+### 3️⃣ Register Page
+
+* Enter mismatched passwords → error shown
+* Enter matching passwords → success
+* Navigate back to Login
+
+### 4️⃣ Architecture
+
+* Entire app wrapped with `AuthProvider`
+* Ready for authentication logic & protected routes
+
+---
+
+## 📌 Learning Focus
+
+This project prioritizes:
+
+* **Understanding over shortcuts**
+* **Manual setup instead of CRA**
+* **Tiny steps with clear outputs**
+* **Real-world patterns**
+
+---
+
+## 🔮 Next Enhancements
+
+* Auth state using Context
+* Protected routes (Dashboard)
+* API integration
+* Lazy loading
+* Testing with Jest
+
+---
+
+👨‍💻 Built as a structured React learning exercise.

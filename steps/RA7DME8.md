@@ -110,3 +110,89 @@ NOT a function you call in JSX
 You want to share data, not UI
 So:
 Context = data channel
+
+### D12 Create AuthProvider
+
+-- Add AuthProvider function. Full updated code
+
+```
+import { createContext, ReactNode } from "react";
+
+const AuthContext = createContext(null);
+
+type AuthProviderProps = {
+  children: ReactNode;
+};
+
+function AuthProvider({ children }: AuthProviderProps) {
+  return children;
+}
+
+export { AuthProvider };
+export default AuthContext;
+
+```
+
+### D13
+
+import { createContext, ReactNode } from "react";
+
+createContext:
+A React function
+Used to create shared data storage
+
+ReactNode: 
+A TypeScript type
+Means: anything React can display on screen
+Examples of ReactNode:
+<div />
+<App />
+"Hello"
+null
+
+### D14
+
+const AuthContext = createContext(null);
+👉 “create object called AuthContext. Initially we give null value
+
+### d15
+
+type AuthProviderProps = { ... };
+
+This is TypeScript only.
+It means:
+“I am defining what inputs (props) my component accepts.”
+So AuthProviderProps describes the shape of props.
+
+### d16
+
+children: ReactNode;
+
+This component accepts something inside it, and that thing can be anything React can render.
+Example:
+<AuthProvider>
+  <App />
+</AuthProvider>
+
+### d17
+
+function AuthProvider(...)
+function 
+
+{ children }: AuthProviderProps
+This function receives props that contain children.
+
+### d18
+
+export { AuthProvider };
+
+This allows other files to import and use the wrapper.
+
+export default AuthContext;
+
+This allows other files to access the shared data box.
+
+### d19
+1️⃣ AuthContext = shared data container
+2️⃣ AuthProvider = wrapper component
+3️⃣ children = what is inside the wrapper

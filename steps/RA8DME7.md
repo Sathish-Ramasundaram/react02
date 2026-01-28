@@ -1,4 +1,5 @@
-- stop page refres and make the email input controlled / (React should know the email value) (c11)
+- **E1** Stop page refresh and make Forgot Password email controlled  
+stop page refres and make the email input controlled / (React should know the email value) 
 
 At top, add ---
 import { useState } from "react";
@@ -14,7 +15,7 @@ const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 
 Strikethrough warning is OK (same reason as before).
 
-- Attach handler to form (c12)
+- **E2** Attach submit handler to Forgot Password form  
 
 From: 
 <form className="w-80 bg-white p-6 rounded shadow">
@@ -25,7 +26,7 @@ To:
   onSubmit={handleSubmit}
 >
 
-- Make email input controlled (c13)
+- **E3** Make Forgot Password email input controlled  
 
 To: 
 <input
@@ -36,7 +37,7 @@ To:
   onChange={(e) => setEmail(e.target.value)}
 />
 
-- Test (c14)
+- **E4** Test Forgot Password form submission
 Type an email
 Click Reset Password or press Enter
 Result:
@@ -44,12 +45,10 @@ Result:
 ✅ Console shows:
 Forgot password email: test@example.com
 
-- Tiny Goal (c15)
+- **E5** Add Forgot Password link in Login page  
 On the Login page, users should be able to click:
 “Forgot password?”
 and go to /forgot-password without page reload.
-
-- Add this line at top in Login.tsx (c16)
 
 import { Link } from "react-router-dom";
 
@@ -64,7 +63,7 @@ Between password and button field, add this
   </Link>
 </div>
 
-- Test (c16)
+- **E6** Test Forgot Password navigation from Login
 
 Below Password input, you should see:
 Forgot password? (blue link)
@@ -75,7 +74,7 @@ Forgot Password page renders
 ❌ No page reload
 ✔ This is correct behavior.
 
-- On the Forgot Password page, give users a way to go back to Login. (c17)
+- **E7** Add Back to Login link in Forgot Password page  
 
 ForgotPassword.tsx
 At top ----
@@ -91,7 +90,7 @@ Below button ---
   </Link>
 </div>
 
-- Test (c18)
+- **E8** Test Back to Login navigation  
 
 EXPECTED OUTPUT (VERIFY)
 Open /forgot-password
@@ -103,14 +102,14 @@ URL changes to /
 Login page appears
 ❌ No page reload
 
-## c19 Register page UI 
+- **E9** Register page UI structure  
 On /register, show:
 Email
 Password
 Confirm Password
 Register button
 
-### c20 replace the below code 
+- **E10** Replace Register page code 
 function Register() {
   return (
     <form className="w-80 bg-white p-6 rounded shadow">
@@ -163,9 +162,9 @@ function Register() {
 
 export default Register;
 
-### c21 Test
+- **E11** Test Register page UI  
 
-### c22 stop refresh + controlled email
+- **E12** Stop refresh and make Register email controlled  
 
 Pressing Enter should NOT refresh
 React should know the email value (Controlled email)
@@ -210,7 +209,7 @@ Result:
 ✅ Console shows:
 Register email: test@example.com
 
-### c23 password and confirm password controlled
+- **E13** Controlled password and confirm password inputs in Register page  
 Goal: 
 On /register:
 React should know password
@@ -250,6 +249,7 @@ const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
   console.log("Confirm Password:", confirmPassword);
 };
 
+- **E14** Test Register form with all controlled inputs  
 EXPECTED OUTPUT (VERIFY)
 Open /register
 Type in all three fields
@@ -262,7 +262,7 @@ Confirm Password: 123456
 ✔ Typing works
 ✔ React owns all values
 
-### c24 Password match Validation
+- **E15** Add password match validation in Register page  
 On /register:
 If passwords don’t match → show error
 If they match → log “Register successful”
@@ -298,6 +298,7 @@ If error is truthy (non‑empty string), render the <p> element.
 If error is empty (""), render nothing.
 This is how you show error messages only when they exist.
 
+- **E16** Test Register form validation  
 EXPECTED OUTPUT (TEST CAREFULLY)
 ❌ Case 1: Passwords don’t match
 Enter different passwords

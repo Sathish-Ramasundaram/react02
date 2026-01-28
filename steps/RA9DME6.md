@@ -1,11 +1,12 @@
-- Make Password input controlled. (C1)
+- **D1** Make Password input controlled  
 React should know the password value
 
-- Inside Login() add ONE line, just below email state: (C2)
+- **D2** Add password state with `useState`  
+- Inside Login() add ONE line, just below email state: 
 
 const [password, setPassword] = useState("");
 
-- Update the password <input> (C3)
+- **D3** Update password input with value and onChange  
 
 From: 
 <input
@@ -23,7 +24,7 @@ To:
   onChange={(e) => setPassword(e.target.value)}
 />
 
-- update handleSubmit (C4)
+- **D4** Update `handleSubmit` to log password 
 
 From: 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -38,7 +39,7 @@ To:
   console.log("Password:", password);
 };
 
-- Test (C5)
+- **D5** Test email and password logging  
 You can type in Email
 You can type in Password
 Click Login
@@ -46,7 +47,7 @@ Console shows:
 Email: your@email.com
 Password: yourpassword
 
-- Next tiny Goal: (c6)
+- **D6** Add basic validation goal  
 When user clicks Login:
 If email or password is empty → show a message
 
@@ -55,7 +56,7 @@ Only this rule:
 ❌ Email OR Password is empty → show error
 ✅ Both filled → log success
 
-- Add error state (c7)
+- **D7** Add error state with `useState`  
 
 const [error, setError] = useState("");
 
@@ -64,7 +65,7 @@ const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 const [error, setError] = useState("");
 
-- update handleSubmit: 
+- **D8** Update `handleSubmit` with validation logic  
 From: 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
   event.preventDefault();
@@ -73,6 +74,7 @@ From:
 };
 
 To: 
+```
 const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
   event.preventDefault();
 
@@ -109,7 +111,7 @@ setError("Email and Password are required")
    ↓
 STOP (return)
 
-- show error message in UI c(8)
+- **D9** Show error message in UI with conditional rendering  
 
 update just above email field
 
@@ -152,7 +154,7 @@ If error is a non‑empty string, render the <p> element.
 If error is empty (""), render nothing.
 This is a common pattern for showing error messages only when they exist.
 
-- Test (c9)
+- **D10** Test validation cases  
 
 ❌ Case 1: Click Login without typing
 You see:
@@ -172,7 +174,7 @@ Password: ...
 ✔ Page does NOT refresh
 ✔ UI responds correctly
 
-- update ForgotPassword.tsx (c10)
+- **D11** Update `ForgotPassword.tsx` with form structure 
 Goal: 
 On /forgot-password, show:
 Title

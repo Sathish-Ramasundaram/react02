@@ -1,11 +1,12 @@
+- **A1** Production build  
 npm run build   
-- production build. (16)
+
 We see
 dist/
  ├── bundle.js
  └── index.html
 
- - paste this code inside public/index.html: (17)
+- **A2** Paste code inside `public/index.html`  
 
  ```
  <!DOCTYPE html>
@@ -21,7 +22,7 @@ dist/
 </html>
 
 ```
-- paste this code inside src/index.tsx (18)
+- **A3** Paste code inside `src/index.tsx`  
 
 import { createRoot } from "react-dom/client";
 
@@ -41,11 +42,11 @@ root.render(
     <div>Test from index.tsx</div>
 );
 
----
 
+- **A4** Run build again  
 npm run build 
-- (19)
 
+- **A5** Start development server  
 npm run dev
 - development server is starting (20)
 Open:
@@ -53,7 +54,7 @@ http://localhost:3000
 You see
 Test from index.tsx
 
-- create a new file App.tsx inside src and paste the below command (21)
+- **A6** Create `App.tsx` inside `src` 
 ```
 function App() {
   return (
@@ -66,7 +67,7 @@ function App() {
 export default App;
 ```
 
-- update these 2 lines index.tsx (22)
+- **A7** Update `index.tsx` to render `App`  
 ```
 import App from "./App";
 
@@ -74,22 +75,23 @@ root.render(
     <App />
 ```
 
-- ctrl + c
-stops the current process. (24)
+- **A8** Stop the current process  
+ctrl + c
 
+- **A9** Run development server again  
 npm run dev
-- run the project / development server is running (25)
+
 What we see
 Hello from App.tsx
 
+- **A10** Install `react-router-dom`  
 npm install react-router-dom
-- to install react-router-dom (26)
 
+- **A11** Install Tailwind dependencies  
 npm install -D tailwindcss postcss autoprefixer
-- Tailwind dependencies (27)
 
+- **A12** Create `tailwind.config.js` file  
 type nul > tailwind.config.js
-- this create the file (28)
 
 
 

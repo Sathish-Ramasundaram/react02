@@ -1,4 +1,4 @@
-- update Login.tsx from pages (B14)
+- **C1** Update `Login.tsx` form structure  
 ```
 function Login() {
   return (
@@ -78,9 +78,9 @@ px-3 → horizontal padding = 0.75rem (12px) on left and right.
 py-2 → vertical padding = 0.5rem (8px) on top and bottom.
 rounded → applies border-radius (default = 0.25rem), giving slightly rounded corner
 
-- test (B15)
+- **C2** Test form rendering  
 
-- preventDefault (B16)
+- **C3** Prevent default form submission 
 By default, <form>:
 Submits to server
 Reloads the page
@@ -89,14 +89,15 @@ We handle submission in JavaScript
 So we must stop default browser behavior
 That’s exactly what preventDefault() does.
 
-- Add this function inside Login.tsx Below function Login() {    (B17)
+- **C4** Add `handleSubmit` function  
+- Add this function inside Login.tsx Below function Login() {    
 
 
 function handleSubmit(event: React.FormEvent) {
   event.preventDefault();
 }
 
-- update this (B18)
+- **C5** Update form with `onSubmit` handler  
 From: 
 <form className="w-80 bg-white p-6 rounded shadow">
 
@@ -106,9 +107,9 @@ To:
   onSubmit={handleSubmit}
 >
 
-- Test (B19)
+- **C6** Test form submission prevention  
 
-- Controlled Components (B20)
+- **C7** Controlled components concept  
 Right now, your email input works, but:
 The browser owns the value
 React does not know what the user typed
@@ -116,7 +117,7 @@ React apps prefer this instead:
 React should know the input value at all times
 That’s what controlled components mean.
 
-- (B21)
+- **C8** Uncontrolled vs Controlled inputs  
 ❌ Before (uncontrolled)
 User types → browser stores text
 React is unaware
@@ -126,13 +127,14 @@ User types → React state updates
 Input shows value from React
 React becomes the single source of truth.
 
-- (B22)
+- **C9** Input value comes from `useState`  
 The input value comes from useState, and every keystroke updates that state.
 
-- Inside Login.tsx, at top include this: (B23)
+- **C10** Import `useState` in `Login.tsx`  
 import { useState } from "react";
 
-inside the Login() function, add this one line: (B23)
+- **C11** Add email state with `useState`  
+inside the Login() function, add this one line: 
 
 const [email, setEmail] = useState("");
 What this means
@@ -140,7 +142,7 @@ email → stores the text
 setEmail → updates the text
 "" → starts empty
 
-- update email input (B24)
+- **C12** Update email input with `value`  
 From: 
 <input
   type="email"
@@ -159,7 +161,7 @@ To:
 What this means?
 “Hey input, show whatever is inside email”
 
-- Test (B25)
+- **C13** Test controlled input behavior  
 ⚠️ IMPORTANT (Expected behavior)
 Now try typing…
 👉 You CANNOT type anymore
@@ -169,8 +171,7 @@ You just told the input:
 But React is not updating yet.
 This is GOOD. Don’t panic.
 
-- 
-add this one more line in the input: (B26)
+- **C14** Add `onChange` to email input 
 onChange={(e) => setEmail(e.target.value)}
 
 <input
@@ -187,18 +188,18 @@ setEmail(...) → update React state
 React re-renders → input shows new value
 🔁 Loop complete.
 
-- Test (B27)
+- **C15** Test controlled input typing  
 Now, you can type email
 
 User types → onChange → setEmail → email state → input value
 That’s controlled input.
 React knows the email value
 
-- tiny goal (B28)
+- **C16** Tiny goal: log email on submit  
 When you click Login or press Enter, you should see the email value in the console.
 No API. No validation. Just proof React has the data.
 
-- update handleSubmit (B29)
+- **C17** Update `handleSubmit` to log email  
 From: 
 function handleSubmit(event: React.FormEvent) {
   event.preventDefault();
@@ -210,7 +211,7 @@ function handleSubmit(event: React.FormEvent) {
   console.log("Email:", email);
 }
 
-- Test (B30)
+- **C18** Test email logging in console  
 EXPECTED OUTPUT (VERIFY)
 Open: http://localhost:3000/
 Type an email, e.g.:
@@ -221,7 +222,8 @@ You should see:
 Email: test@example.com
 ✔ If you see this → React state + form submission works.
 
-- FormEvent is struck through. No problem with result (B31)
+- **C19** FormEvent strikethrough explanation
+FormEvent is struck through. No problem with result
 
 Change From: 
 function handleSubmit(event: React.FormEvent) {
