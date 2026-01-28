@@ -1,0 +1,1 @@
+shift + Alt + F -> to align the code

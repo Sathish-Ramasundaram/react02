@@ -1,0 +1,17 @@
+git init
+
+create .gitignore
+
+# dependencies
+node_modules/
+
+# production build
+dist/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# env files
+.env
