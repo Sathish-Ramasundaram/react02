@@ -1,12 +1,13 @@
 const path = require('path');
 const HtmlRspackPlugin = require('@rspack/plugin-html').default;
+const isProd = process.env.NODE_ENV === "production";
 
 module.exports = {
   entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/',
+    publicPath: isProd ? "/react02/" : "/",
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
