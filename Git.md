@@ -72,3 +72,11 @@ git push
   npm run deploy  // change the setting 
 
 setting -> pages -> branch -> gh-page (root) => verify this
+
+--- page is blank. It is working in local server
+
+in App.tsx
+From: 
+<BrowserRouter>
+To: 
+<BrowserRouter basename="/react02">
