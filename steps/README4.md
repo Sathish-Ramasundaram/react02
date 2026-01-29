@@ -19,6 +19,18 @@ import { BrowserRouter } from "react-router-dom";
 
 ```
 
+- **B14.B** Update `rspack.config.js` for history fallback  
+From: 
+devServer: {
+  port: 3000,
+},
+
+To: 
+devServer: {
+  port: 3000,
+  historyApiFallback: true,
+},
+
 - **B15** Update `App.tsx` with Routes and Route  
 
 ```
@@ -59,17 +71,10 @@ element={<Home />}
 element={<h1>Hello</h1>}
 Here, we are rendering JSX directly — which is perfect for learning.
 
-- **B17** Update `rspack.config.js` for history fallback  
-From: 
-devServer: {
-  port: 3000,
-},
+You can try this, 
+<Route path="/test" element={<h2>Test</h2>} />
+Test will appear in .../test
 
-To: 
-devServer: {
-  port: 3000,
-  historyApiFallback: true,
-},
 
 - **B18** Add Register route in `App.tsx`  
 
@@ -112,6 +117,9 @@ devServer: {
 ```
 
 - **B21** Create `Login.tsx` page  (src/pages)
+mkdir src\pages   
+type nul > src\pages\Login.tsx
+
 
 function Login() {
   return (
@@ -145,6 +153,7 @@ To:
 - **B23** Test with `npm run dev`  
 
 - **B24** create /pages/Register.tsx 
+type nul > src/pages/Register.tsx
 
 function Register() {
   return (
@@ -164,6 +173,7 @@ replace with,
 <Route path="/register" element={<Register />} />
 
 - **B26** create ForgotPassword.tsx inside src/pages/ and paste the below code 
+type nul >src/pages/ForgotPassword.tsx
 
 function ForgotPassword() {
   return (
@@ -185,6 +195,7 @@ replace with:
 - **B28** Test ForgotPassword route  
 
 - **B29** create Dashboard.tsx inside src/pages/ and paste the below code 
+type nul >src/pages/Dashboard.tsx  
 
 function Dashboard() {
   return (

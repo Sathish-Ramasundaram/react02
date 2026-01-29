@@ -34,9 +34,11 @@ Compiles
 Does NOTHING yet
 
 ### D2 create new folder inside 
-src/context
+mkdir src\context
 
 ### D4 create file src/context/AuthContext.tsx
+type nul >src/context/AuthContext.tsx
+
 paste this 
 ```
 import { createContext } from "react";

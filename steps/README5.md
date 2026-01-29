@@ -122,6 +122,11 @@ That’s what controlled components mean.
 User types → browser stores text
 React is unaware
 
+How to verify this: 
+Type email and open Console and run:
+document.querySelector('input[type="email"]').value
+
+
 ✅ After (controlled)
 User types → React state updates
 Input shows value from React
@@ -221,6 +226,19 @@ Open DevTools → Console
 You should see:
 Email: test@example.com
 ✔ If you see this → React state + form submission works.
+
+In controlled inputs, the browser still holds the value, but React state is the single source of truth and always wins.
+Controlled Input
+
+Keyboard
+   ↓
+React State (truth)
+   ↓
+DOM (mirror)
+Browser DOM is still know the value. Right?”
+✔ Correct
+✔ But React owns it
+✔ DOM is just a reflection
 
 - **C19** FormEvent strikethrough explanation
 FormEvent is struck through. No problem with result

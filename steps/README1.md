@@ -95,6 +95,11 @@ module.exports = {
 
 15. Update the scripts in `package.json`  
 
+Note: 
+"test" → only needed if you actually run tests
+Delete "test" for now
+Add it back only when you introduce Jest / React Testing Library
+
   "scripts": {
     "start": "rspack serve",
     "build": "rspack build"
@@ -105,7 +110,7 @@ module.exports = {
 "scripts": {
   "dev": "rspack serve",
   "build": "rspack build"
-}
+},
 
 Not mandatory, but recommended.
 Why?

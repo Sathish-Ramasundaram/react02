@@ -1,6 +1,6 @@
 import { createContext, ReactNode } from "react";
 
-const AuthContext = createContext(null);
+const AuthContext = createContext(false);
 
 type AuthProviderProps = {
   children: ReactNode;
@@ -8,7 +8,7 @@ type AuthProviderProps = {
 
 function AuthProvider({ children }: AuthProviderProps) {
   return (
-    <AuthContext.Provider value={null}>
+    <AuthContext.Provider value={false}>
       {children}
     </AuthContext.Provider>
   );

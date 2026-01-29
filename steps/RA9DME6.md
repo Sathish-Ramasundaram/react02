@@ -135,13 +135,7 @@ To:
         Login
       </h2>
 
-      {error && (
-        <p className="mb-3 text-sm text-red-600">
-            {error}
-        </p>
-        )
-        }
-
+      {error && <p className="mb-3 text-sm text-red-600">{error}</p>}
 
       <div className="mb-3">
         <label className="block mb-1 text-sm">

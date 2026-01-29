@@ -63,6 +63,12 @@ Between password and button field, add this
   </Link>
 </div>
 
+Client-side
+Code that runs in the browser and handles UI, routing, and logic without reloading pages.
+
+History API
+A browser API that allows JavaScript to change the URL and navigation history without triggering a page reload.
+
 - **E6** Test Forgot Password navigation from Login
 
 Below Password input, you should see:
@@ -286,11 +292,7 @@ const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 };
 
 --- add above the email field, 
-{error && (
-  <p className="mb-3 text-sm text-red-600">
-    {error}
-  </p>
-)}
+{error && <p className="mb-3 text-sm text-red-600">{error}</p>}
 
 Note: 
 In React, {error && (...)} is a shorthand for:
