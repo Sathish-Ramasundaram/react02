@@ -204,3 +204,116 @@ function ForgotPassword() {
 }
 
 export default ForgotPassword;
+
+
+- **E1** Stop page refresh and make Forgot Password email controlled  
+stop page refres and make the email input controlled / (React should know the email value) 
+
+At top, add ---
+import { useState } from "react";
+
+Inside ForgotPassword() add: ---
+const [email, setEmail] = useState("");
+
+and add submit handler (stop refresh) ---
+const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  event.preventDefault();
+  console.log("Forgot password email:", email);
+};
+
+Strikethrough warning is OK (same reason as before).
+
+- **E2** Attach submit handler to Forgot Password form  
+
+From: 
+<form className="w-80 bg-white p-6 rounded shadow">
+
+To: 
+<form
+  className="w-80 bg-white p-6 rounded shadow"
+  onSubmit={handleSubmit}
+>
+
+- **E3** Make Forgot Password email input controlled  
+
+To: 
+<input
+  type="email"
+  className="w-full border px-3 py-2 rounded"
+  placeholder="Enter your email"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+/>
+
+- **E4** Test Forgot Password form submission
+Type an email
+Click Reset Password or press Enter
+Result:
+❌ No page refresh
+✅ Console shows:
+Forgot password email: test@example.com
+
+- Add button style for visually see the difference while clicking. 
+
+- **E5** Add Forgot Password link in Login page  
+On the Login page, users should be able to click:
+“Forgot password?”
+and go to /forgot-password without page reload.
+
+import { Link } from "react-router-dom";
+
+Between password and button field, add this 
+
+<div className="mb-4 text-right">
+  <Link
+    to="/forgot-password"
+    className="text-sm text-blue-600 hover:underline"
+  >
+    Forgot password?
+  </Link>
+</div>
+
+Client-side
+Code that runs in the browser and handles UI, routing, and logic without reloading pages.
+
+History API
+A browser API that allows JavaScript to change the URL and navigation history without triggering a page reload.
+
+- **E6** Test Forgot Password navigation from Login
+
+Below Password input, you should see:
+Forgot password? (blue link)
+Click it
+Result:
+URL changes to /forgot-password
+Forgot Password page renders
+❌ No page reload
+✔ This is correct behavior.
+
+- **E7** Add Back to Login link in Forgot Password page  
+
+ForgotPassword.tsx
+At top ----
+import { Link } from "react-router-dom";
+
+Below button ---
+<div className="mt-4 text-center">
+  <Link
+    to="/"
+    className="text-sm text-blue-600 hover:underline"
+  >
+    Back to Login
+  </Link>
+</div>
+
+- **E8** Test Back to Login navigation  
+
+EXPECTED OUTPUT (VERIFY)
+Open /forgot-password
+Below Reset Password button, you should see:
+Back to Login
+Click it
+Result:
+URL changes to /
+Login page appears
+❌ No page reload

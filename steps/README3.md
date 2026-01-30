@@ -1,173 +1,235 @@
-- **B1.1** Downgrade to Tailwind v3 (stable)  
-npm uninstall tailwindcss @tailwindcss/postcss
-npm install -D tailwindcss@3.4.17 postcss autoprefixer
+- **B13** BrowserRouter explanation  
+BrowserRouter is the component that enables routing in a React app.
+It allows your React app to change pages using URLs without reloading the page.
 
-- **B1.2** Install Tailwind PostCSS plugin  
-npm install -D @tailwindcss/postcss
-
-- **B2** Open and paste code  
-- **B3** Ensure `tailwind.config.js` is correct  
+- **B14** Update `App.tsx` with BrowserRouter wrapper 
 ```
-module.exports = {
-  content: [
-    "./public/index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-};
-```
+import { BrowserRouter } from "react-router-dom";
 
-
-- **B4** Create `postcss.config.js` file  
-type nul > postcss.config.js
-
-- **B5** Paste code into `postcss.config.js`  
-```
-module.exports = {
-  plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
-  },
-};
-```
-
-- **B6** Create `src/index.css` file  
-type nul > src/index.css
-
-- **B7** Paste Tailwind directives into `index.css`  
-```
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-global entry point for all styles 
-
-Injects base styles + CSS reset 
-Injects pre-built component styles 
-Injects utility classes 
-
-base → components → utilities
-Utilities must override base & component styles
-
-- **B8** Update `index.tsx` to import CSS  
-import "./index.css";
-
-- **B9** Install CSS loader dependencies  
-npm install -D style-loader css-loader postcss-loader
-
-- **B10** Update `rspack.config.js` rules  
-existing module: rules propably look like this
-```
-module: {
-  rules: [
-    {
-      test: /\.tsx?$/,
-      use: {
-        loader: 'builtin:swc-loader',
-        options: {
-          jsc: {
-            parser: {
-              syntax: 'typescript',
-              tsx: true,
-            },
-            transform: {
-              react: {
-                runtime: 'automatic',
-              },
-            },
-          },
-        },
-      },
-    },
-  ],
-},
-```
-
-update / Add css rule
-```
-module: {
-  rules: [
-    {
-      test: /\.tsx?$/,
-      use: {
-        loader: 'builtin:swc-loader',
-        options: {
-          jsc: {
-            parser: {
-              syntax: 'typescript',
-              tsx: true,
-            },
-            transform: {
-              react: {
-                runtime: 'automatic',
-              },
-            },
-          },
-        },
-      },
-    },
-    {
-  test: /\.css$/,
-  use: [
-    "style-loader",
-    {
-      loader: "css-loader",
-      options: {
-        importLoaders: 1,
-      },
-    },
-    "postcss-loader",
-  ],
-},
-  ],
-},
-```
-
-- **B12** Update `App.tsx` temporarily to test Tailwind
-
-```
-function App() {
+---
   return (
+    <BrowserRouter>
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <h1 className="text-2xl font-bold text-blue-600">
-        Tailwind is working 🚀
+        Tailwind is working. Router wrapper working
       </h1>
     </div>
+    </BrowserRouter>
+  );
+
+```
+
+- **B14.B** Update `rspack.config.js` for history fallback  
+From: 
+devServer: {
+  port: 3000,
+},
+
+To: 
+devServer: {
+  port: 3000,
+  historyApiFallback: true,
+},
+
+❌ Without historyApiFallback
+/ → works
+/login → works only if navigated inside app
+Refresh /login → 404
+
+✅ With historyApiFallback: true
+/
+/login
+/dashboard
+Refresh anywhere → always works
+
+- **B15** Update `App.tsx` with Routes and Route  
+
+```
+update Import: 
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+--
+
+    <BrowserRouter>
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <h1 className="text-2xl font-bold text-green-600">
+                Home Route Working
+              </h1>
+            }
+          />
+        </Routes>
+      </div>
+    </BrowserRouter>
+
+```
+- **B16** Explanation of `<Routes>` and `<Route>`  
+<Routes> is a container for all your routes. Decision Maker
+
+<Route> defines a mapping: If the URL matches this path, render something.
+
+path="/" Match the root URL - http://localhost:3000/
+later: /register
+/forgot-password
+/dashboard
+
+element={...} 
+element expects JSX. NOT a component name. NOT a string
+This are all valid
+element={<Home />}
+element={<h1>Hello</h1>}
+Here, we are rendering JSX directly — which is perfect for learning.
+
+You can try this, 
+<Route path="/test" element={<h2>Test</h2>} />
+
+Test will appear in .../test
+If it is not coming, try save and run again. 
+
+
+- **B18** Add Register route in `App.tsx`  
+
+          <Route
+            path="/register"
+            element={
+              <h1 className="text-4xl font-bold text-purple-600 bg-yellow-100 p-4">
+                Register Route Working
+              </h1>
+            }
+          />
+
+---
+
+- **B19** Add Forgot Password and Dashboard route in `App.tsx`  
+
+```
+<Route
+            path="/forgot-password"
+            element={
+              <h1 className="text-2xl font-bold text-red-600">
+                Forgot Password Route Working
+              </h1>
+            }
+          />
+```
+
+```
+          <Route
+            path="/dashboard"
+            element={
+              <h1 className="text-2xl font-bold text-blue-600">
+                Dashboard Route Working
+              </h1>
+            }
+          />
+
+```
+
+- Test it. 
+
+
+- **B21** Create pages folder inside src and `Login.tsx` (src/pages)
+
+mkdir src\pages   
+
+type nul > src\pages\Login.tsx
+
+
+function Login() {
+  return (
+    <h1 className="text-2xl font-bold text-green-600">
+      Login Page Working from pages
+    </h1>
   );
 }
 
-export default App;
-```
-min-h-screen flex items-center justify-center bg-gray-100
-min-height: 100vh;
-display: flex;
-align-items: center;
-justify-content: center;
-background-color: #f3f4f6;
+export default Login;
 
-align-items vs justify-content:
 
-        ↑  align-items
-        |
-← justify-content → 
-        |
-        ↓
+- **B22** Update `App.tsx` to use Login page  
 
-justify-content aligns items along the main axis,
-align-items aligns items along the cross axis.
+import Login from "./pages/Login";
 
-display: flex;
-flex-direction: row; /* default */
-Main axis → horizontal (left → right)
-Cross axis → vertical (top → bottom)
-If you change flex-direction, the axes switch.
-They work only if the parent has: display: flex;
+And
+From: 
+<Route
+  path="/"
+  element={
+    <h1 className="text-2xl font-bold text-green-600">
+      Home Route Working 
+    </h1>
+  }
+/>
 
-text-2xl font-bold text-blue-600
-font-size: 1.5rem; / Makes text large
-font-weight: 700; / Makes text bold
-color: #2563eb;
+To: 
+<Route path="/" element={<Login />} />
 
+- **B23** Test with `npm run dev`  
+
+- **B24** create /pages/Register.tsx 
+type nul > src/pages/Register.tsx
+
+function Register() {
+  return (
+    <h1 className="text-2xl font-bold text-purple-600">
+      Register Page Working from pages
+    </h1>
+  );
+}
+
+export default Register;
+
+- **B25** Update `App.tsx` to use Register page  
+
+import Register from "./pages/Register";
+
+replace with, 
+<Route path="/register" element={<Register />} />
+
+- **B26** create ForgotPassword.tsx inside src/pages/ and paste the below code 
+type nul >src/pages/ForgotPassword.tsx
+
+function ForgotPassword() {
+  return (
+    <h1 className="text-2xl font-bold text-red-600">
+      Forgot Password Page Working from pages
+    </h1>
+  );
+}
+
+export default ForgotPassword;
+
+- **B27** Update `App.tsx` to use ForgotPassword page  
+
+import ForgotPassword from './pages/ForgotPassword';
+
+replace with:
+<Route path="/forgot-password" element={<ForgotPassword />} />
+
+- **B28** Test ForgotPassword route  
+
+- **B29** create Dashboard.tsx inside src/pages/ and paste the below code 
+type nul >src/pages/Dashboard.tsx  
+
+function Dashboard() {
+  return (
+    <h1 className="text-2xl font-bold text-blue-600">
+      Dashboard Page Working from pages
+    </h1>
+  );
+}
+
+export default Dashboard;
+
+- **B30** Update `App.tsx` to use Dashboard page  
+
+import Dashboard from './pages/Dashboard';
+
+replace with: 
+<Route path="/dashboard" element={<Dashboard />} />
+
+- **B31** Test Dashboard route  
