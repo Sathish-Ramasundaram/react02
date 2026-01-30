@@ -2,6 +2,7 @@ import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 
 function News() {
+
     const isAuthenticated = useContext(AuthContext);
 
   return (

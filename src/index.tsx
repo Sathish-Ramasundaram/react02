@@ -2,6 +2,8 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import { AuthProvider } from "./context/AuthContext";
+import ErrorBoundary from "./components/ErrorBoundary";
+
 
 const container = document.getElementById("root"); 
 // container can be:
@@ -16,7 +18,9 @@ if (!container) { // !container means container === null OR container === undefi
 
 const root = createRoot(container);
 root.render(
-  <AuthProvider>
-    <App />
-  </AuthProvider>
+  <ErrorBoundary>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  </ErrorBoundary>
 );
