@@ -82,12 +82,14 @@ Injects utility classes
 base → components → utilities
 Utilities must override base & component styles
 
-- **B8** Update `index.tsx` to import CSS  
-  import "./index.css";
 
-- **B9** Install CSS loader dependencies
+- **B8.1** Install CSS loader dependencies
 
 npm install -D style-loader css-loader postcss-loader
+
+
+- **B8** Update `index.tsx` to import CSS  
+  import "./index.css";
 
 - **B10** Update `rspack.config.js` rules  
   existing module: rules propably look like this
