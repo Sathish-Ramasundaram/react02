@@ -1,5 +1,5 @@
 - **A10** Install `react-router-dom`  
-npm install react-router-dom
+  npm install react-router-dom
 
 npm → Node Package Manager
 install → install a package
@@ -10,25 +10,27 @@ Multiple pages in a single-page app (SPA)
 URL changes without full page reload
 Navigation like /login, /dashboard, /profile
 
-Example: 
+Example:
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 - **A11** Install Tailwind dependencies  
-npm install -D tailwindcss postcss autoprefixer
-
-- **A12** Create `tailwind.config.js` file  
-type nul > tailwind.config.js
-
+  npm install -D tailwindcss postcss autoprefixer
 - **B1.1** Downgrade to Tailwind v3 (stable)  
-npm uninstall tailwindcss @tailwindcss/postcss
+  npm uninstall tailwindcss @tailwindcss/postcss
+
 npm install -D tailwindcss@3.4.17 postcss autoprefixer
 
 - **B1.2** Install Tailwind PostCSS plugin  
-npm install -D @tailwindcss/postcss
+  npm install -D @tailwindcss/postcss
 
-- **B2** Open and paste code  
-- **B3** Add this to `tailwind.config.js`  
+- Create `tailwind.config.js` file  
+  type nul > tailwind.config.js
+
+- **B2** Open and paste code
+- **B3** Add this to `tailwind.config.js`
+
 ```
+
 module.exports = {
   content: [
     "./public/index.html",
@@ -39,48 +41,57 @@ module.exports = {
   },
   plugins: [],
 };
-```
 
+```
 
 - **B4** Create `postcss.config.js` file  
-type nul > postcss.config.js
+  type nul > postcss.config.js
 
-- **B5** Paste code into `postcss.config.js`  
+- **B5** Paste code into `postcss.config.js`
+
 ```
+
 module.exports = {
   plugins: {
     tailwindcss: {},
     autoprefixer: {},
   },
 };
+
 ```
 
 - **B6** Create `src/index.css` file  
-type nul > src/index.css
+  type nul > src/index.css
 
-- **B7** Paste Tailwind directives into `index.css`  
+- **B7** Paste Tailwind directives into `index.css`
+
 ```
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-```
-global entry point for all styles 
 
-Injects base styles + CSS reset 
-Injects pre-built component styles 
-Injects utility classes 
+```
+
+global entry point for all styles
+
+Injects base styles + CSS reset
+Injects pre-built component styles
+Injects utility classes
 
 base → components → utilities
 Utilities must override base & component styles
 
 - **B8** Update `index.tsx` to import CSS  
-import "./index.css";
+  import "./index.css";
 
-- **B9** Install CSS loader dependencies  
+- **B9** Install CSS loader dependencies
+
 npm install -D style-loader css-loader postcss-loader
 
 - **B10** Update `rspack.config.js` rules  
-existing module: rules propably look like this
+  existing module: rules propably look like this
+
 ```
 module: {
   rules: [
@@ -108,6 +119,7 @@ module: {
 ```
 
 update / Add css rule
+
 ```
 module: {
   rules: [
@@ -130,6 +142,8 @@ module: {
         },
       },
     },
+
+
     {
   test: /\.css$/,
   use: [
@@ -143,6 +157,8 @@ module: {
     "postcss-loader",
   ],
 },
+
+
   ],
 },
 ```
@@ -150,6 +166,7 @@ module: {
 - **B12** Update `App.tsx` temporarily to test Tailwind
 
 ```
+
 function App() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -161,7 +178,9 @@ function App() {
 }
 
 export default App;
+
 ```
+
 min-h-screen flex items-center justify-center bg-gray-100
 min-height: 100vh;
 display: flex;
@@ -173,15 +192,16 @@ align-items vs justify-content:
 
         ↑  align-items
         |
-← justify-content → 
-        |
-        ↓
+
+← justify-content →
+|
+↓
 
 justify-content aligns items along the main axis,
 align-items aligns items along the cross axis.
 
 display: flex;
-flex-direction: row; /* default */
+flex-direction: row; /_ default _/
 Main axis → horizontal (left → right)
 Cross axis → vertical (top → bottom)
 If you change flex-direction, the axes switch.
@@ -191,4 +211,3 @@ text-2xl font-bold text-blue-600
 font-size: 1.5rem; / Makes text large
 font-weight: 700; / Makes text bold
 color: #2563eb;
-
