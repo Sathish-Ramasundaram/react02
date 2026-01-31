@@ -1,8 +1,12 @@
 # Tailwind:
 
 1. 
+
 npm install -D tailwindcss@3.4.17 postcss autoprefixer
 npm install -D @tailwindcss/postcss
+
+Install CSS loader dependencies
+npm install -D style-loader css-loader postcss-loader
 
 2. 
 type nul > tailwind.config.js
@@ -44,12 +48,17 @@ type nul > src/index.css
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 ```
 global entry point for all styles 
 
-5. 
-Install CSS loader dependencies
-npm install -D style-loader css-loader postcss-loader
+
+Injects base styles + CSS reset
+Injects pre-built component styles
+Injects utility classes
+
+base → components → utilities
+Utilities must override base & component styles
 
 6. 
 Update `index.tsx` to import CSS  
@@ -133,6 +142,7 @@ module: {
 8. 
 
 ```
+
 function App() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -144,10 +154,37 @@ function App() {
 }
 
 export default App;
+
 ```
+
 min-h-screen flex items-center justify-center bg-gray-100
 min-height: 100vh;
 display: flex;
 align-items: center;
 justify-content: center;
 background-color: #f3f4f6;
+
+align-items vs justify-content:
+
+        ↑  align-items
+        |
+
+← justify-content →
+|
+↓
+
+justify-content aligns items along the main axis,
+align-items aligns items along the cross axis.
+
+display: flex;
+flex-direction: row; /_ default _/
+Main axis → horizontal (left → right)
+Cross axis → vertical (top → bottom)
+If you change flex-direction, the axes switch.
+They work only if the parent has: display: flex;
+
+text-2xl font-bold text-blue-600
+font-size: 1.5rem; / Makes text large
+font-weight: 700; / Makes text bold
+color: #2563eb;
+

@@ -1,3 +1,18 @@
+- **A** Install `react-router-dom`  
+  npm install react-router-dom
+
+npm → Node Package Manager
+install → install a package
+react-router-dom → the package name
+
+Routing means:
+Multiple pages in a single-page app (SPA)
+URL changes without full page reload
+Navigation like /login, /dashboard, /profile
+
+Example:
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 - **B13** BrowserRouter explanation  
 BrowserRouter is the component that enables routing in a React app.
 It allows your React app to change pages using URLs without reloading the page.

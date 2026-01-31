@@ -11,10 +11,10 @@
    shift + ctrl + `
 
 5. Initialize a Node.js project
-   npm init -y
+npm init -y
 
 6. Install React core libraries
-   npm install react react-dom
+npm install react react-dom
 
 7. Set up Rspack
    npm install -D @rspack/core @rspack/cli @rspack/dev-server @rspack/plugin-react-refresh react-refresh @rspack/plugin-html
@@ -36,13 +36,58 @@ HTML injection → ready
 11. Create the `index.html` file inside `public`  
     type nul > public\index.html
 
+    Paste code inside `public/index.html`
+
+```
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+       <meta charset="utf-8" />
+       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+       <title>SR Stores</title>
+   </head>
+   <body>
+       <div id="root"></div>
+   </body>
+</html>
+
+```
+
 12. Create the `index.tsx` file inside `src`  
     type nul > src\index.tsx
+
+Paste code inside `src/index.tsx`
+
+```
+
+import { createRoot } from "react-dom/client";
+
+const container = document.getElementById("root");
+
+if (!container) { // !container means container === null OR container === undefined OR any “falsy” value
+throw new Error("Root element not found");
+}
+
+const root = createRoot(container);
+root.render(
+<div>Test from index.tsx</div>
+);
+
+```
+
+createRoot is a function provided by React DOM (specifically React 18+) that creates a root for your React app.
+
+container can be:
+an actual DOM element (<div id="root">)
+or null (if it doesn’t exist)
+So its type is:
+HTMLElement | null
+
 
 13. Create the Rspack configuration file in the root  
     type nul > rspack.config.js
 
-14. Paste code into `rspack.config.js`
+Paste code into `rspack.config.js`
 
 ```
 
@@ -94,6 +139,13 @@ module.exports = {
 
 ```
 
+entry defines where the React app starts (index.tsx).
+swc-loader converts TypeScript + JSX into browser-ready JavaScript.
+HtmlRspackPlugin injects the bundled JS into index.html.
+devServer runs the app locally on port 3000.
+
+---
+
 15. Update the scripts in `package.json`
 
 Note:
@@ -119,47 +171,6 @@ start is conventionally used by CRA
 dev is clearer for custom setups
 Avoids confusion later when explaining
 
-- **A2** Paste code inside `public/index.html`
-
-```
-<!DOCTYPE html>
-<html lang="en">
-   <head>
-       <meta charset="utf-8" />
-       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-       <title>SR Stores</title>
-   </head>
-   <body>
-       <div id="root"></div>
-   </body>
-</html>
-
-```
-
-- **A3** Paste code inside `src/index.tsx`
-
-import { createRoot } from "react-dom/client";
-
-const container = document.getElementById("root");
-
-if (!container) { // !container means container === null OR container === undefined OR any “falsy” value
-throw new Error("Root element not found");
-}
-
-const root = createRoot(container);
-root.render(
-<div>Test from index.tsx</div>
-);
-
----
-
-createRoot is a function provided by React DOM (specifically React 18+) that creates a root for your React app.
-
-container can be:
-an actual DOM element (<div id="root">)
-or null (if it doesn’t exist)
-So its type is:
-HTMLElement | null
 
 - **A4** Production build  
   npm run build
@@ -179,6 +190,7 @@ Shift + Alt + F ---> Align the code
   You see
   Test from index.tsx
 
+
 - **A6** Create `App.tsx` inside `src`
   type nul > src\App.tsx
 
@@ -192,6 +204,7 @@ function App() {
 }
 
 export default App;
+
 ```
 
 - **A7** Update `index.tsx` to render `App`
