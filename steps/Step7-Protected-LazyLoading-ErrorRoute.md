@@ -18,6 +18,7 @@ mkdir src\routes
 type nul > src\routes\ProtectedRoute.tsx
 
 ```
+
 import { ReactNode, useContext } from "react";
 import { Navigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
@@ -179,6 +180,8 @@ routes
 heavy pages
 charts
 dashboards
+
+
 
 13. Error Route (404 – Not Found)
 If a user goes to:

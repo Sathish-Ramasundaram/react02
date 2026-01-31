@@ -42,6 +42,7 @@ mkdir src\components
 type nul > src\components\ErrorBoundary.tsx
 
 ```
+
 import { Component, ReactNode } from "react";
 
 type ErrorBoundaryProps = {
@@ -83,6 +84,7 @@ class ErrorBoundary extends Component<
 }
 
 export default ErrorBoundary;
+
 ```
 
 6. Wrap your App. Update index.tsx
@@ -130,6 +132,8 @@ App does not break completely
 
 9. Remove the throw new Error(...) line
 (It was only for testing.)
+
+
 
 10. useMemo
 
@@ -179,7 +183,13 @@ function Dashboard() {
 
       <p>Calculated value: {calculatedValue}</p>
 
-      <button onClick={() => setCount(count + 1)}>
+      <button onClick={() => setCount(count + 1)}
+                      className="w-full bg-blue-600 text-white py-2 rounded
+    transition
+    duration-150
+    hover:bg-blue-700
+    active:bg-blue-800
+    active:scale-95">
         Increment Count
       </button>
 

@@ -11,67 +11,16 @@ mkdir src\context
 type nul >src/context/AuthContext.tsx
 
 paste this 
+
 ```
+
 import { createContext } from "react";
 
 const AuthContext = createContext(null);
 
 export default AuthContext;
+
 ```
-### D5 
-import { createContext } from "react";
-
-You are importing a React function called createContext.
-What createContext is for
-createContext lets you create a shared data container that:
-Can be accessed by any component
-Without passing props down manually
-Think of it as:
-A global box where you can store data like “Is user logged in?”
-
-### D7
-const AuthContext = createContext(null);
-AuthContext is an object created by React that represents:
-“Authentication-related shared data”
-Right now, it contains nothing.
-
-createContext(null)
-The default value of the context is null
-If a component tries to read this context without a Provider, it will get null
-We use null because:
-User is not logged in by default
-Auth data does not exist yet
-
-### D8
-export default AuthContext;
-This makes AuthContext available to other files.
-Why?
-Other components will need to:
-Provide auth data
-Consume auth data
-So we export it.
-
-### D9
-
-function ComponentName()
-→ This creates a React COMPONENT
-
-createContext()
-→ This creates a React CONTEXT OBJECT
-
-### D10 Function component
-Eg: 
-function Login() {
-  return <div>Login</div>;
-}
-What this is:
-A function
-Returns JSX
-React renders it to the UI
-👉 Used when:
-You want something visible on the screen
-So:
-Components = UI
 
 ### D11 Context creation 
 const AuthContext = createContext(null);
@@ -89,6 +38,7 @@ Context = data channel
 -- Add AuthProvider function. Full updated code
 
 ```
+
 import { createContext, ReactNode } from "react";
 
 const AuthContext = createContext(null);
@@ -102,7 +52,9 @@ function AuthProvider({ children }: AuthProviderProps) {
 }
 
 export { AuthProvider };
+
 export default AuthContext;
+
 
 ```
 
@@ -185,6 +137,8 @@ Means “nothing”	        Means “not logged in”
 
 - 2. update Dashboard.tsx to: 
 
+```
+
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 
@@ -205,6 +159,8 @@ function Dashboard() {
 
 export default Dashboard;
 
+```
+
 - 3. Test
 Expected Output: 
 
@@ -213,6 +169,7 @@ Logged Out
 Dashboard Page Working from pages
 
 - 4. Add AuthProvider
+
 Add this in index.tsx
 import { AuthProvider } from "./context/AuthContext";
 
@@ -251,6 +208,8 @@ Before, Dashboard → default value (false)
 Now, Dashboard → Provider value (false)
 Same result, different source.
 
+if the above one is null, you will see value in redcolor (Typescript) error. So, for now, we can make the above one as false. But, note the value is the source for this. 
+
 - 6. 
 Goal to prove that Context is shared data by showing the same value on two different pages.
 Dashboard (already exists)
@@ -276,7 +235,9 @@ export default News;
 -- import News in App
 
 import News from "./pages/News";
+
 And ---
+
 <Route path="/news" element={<News />} />
 
 8. Update News.tsx

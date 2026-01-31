@@ -34,6 +34,17 @@ import { BrowserRouter } from "react-router-dom";
 
 ```
 
+- Test: 
+No change. 
+
+Right now:
+You are not using routes yet
+BrowserRouter is just preparing the app for routing
+
+Think of it like this 🧠
+👉 BrowserRouter = wiring
+👉 Routes/Route = actual switches
+
 - **B14.B** Update `rspack.config.js` for history fallback  
 From: 
 devServer: {
@@ -153,6 +164,7 @@ mkdir src\pages
 
 type nul > src\pages\Login.tsx
 
+```
 
 function Login() {
   return (
@@ -164,6 +176,7 @@ function Login() {
 
 export default Login;
 
+```
 
 - **B22** Update `App.tsx` to use Login page  
 
@@ -186,8 +199,10 @@ To:
 - **B23** Test with `npm run dev`  
 
 - **B24** create /pages/Register.tsx 
+
 type nul > src/pages/Register.tsx
 
+```
 function Register() {
   return (
     <h1 className="text-2xl font-bold text-purple-600">
@@ -197,6 +212,8 @@ function Register() {
 }
 
 export default Register;
+
+```
 
 - **B25** Update `App.tsx` to use Register page  
 
@@ -228,6 +245,7 @@ replace with:
 - **B28** Test ForgotPassword route  
 
 - **B29** create Dashboard.tsx inside src/pages/ and paste the below code 
+
 type nul >src/pages/Dashboard.tsx  
 
 function Dashboard() {

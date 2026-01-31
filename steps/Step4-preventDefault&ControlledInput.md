@@ -80,6 +80,8 @@ rounded → applies border-radius (default = 0.25rem), giving slightly rounded c
 
 - **C2** Test form rendering  
 
+
+
 - **C3** Prevent default form submission 
 By default, <form>:
 Submits to server
@@ -89,17 +91,20 @@ We handle submission in JavaScript
 So we must stop default browser behavior
 That’s exactly what preventDefault() does.
 
-- **C4** Add `handleSubmit` function  
-- Add this function inside Login.tsx Below function Login() {    
 
+
+- **C4** Add `handleSubmit` function  
+- Add this function inside Login.tsx Below function Login() {   
+
+```
 
 function handleSubmit(event: React.FormEvent) {
   event.preventDefault();
 }
 
--- 
+```
 
-- **C19** FormEvent strikethrough explanation
+- **C19** FormEvent strikethrough.
 FormEvent is struck through. No problem with result
 
 Change From: 
@@ -125,6 +130,8 @@ There is NO replacement yet that removes the strikethrough
 ⚠️ Strikethrough ≠ wrong
 ⚠️ Strikethrough ≠ unsafe
 
+The change improves TypeScript type safety by explicitly stating the event comes from a <form>, without changing how the code runs.
+
 - **C5** Update form with `onSubmit` handler  
 From: 
 <form className="w-80 bg-white p-6 rounded shadow">
@@ -148,6 +155,9 @@ To:
     active:scale-95
   "
       >
+This is Tailwind only: 
+className="w-full bg-blue-600 text-white py-2 rounded transition duration-150 hover:bg-blue-700 active:bg-blue-800 active:scale-95"
+
 
 - **C7** Controlled components concept  
 Right now, your email input works, but:
@@ -288,3 +298,52 @@ Next re-render → value comes back
 Why?
 React re-applies its state to the DOM.
 💥 This is the strongest proof that React owns the value.
+
+- **D1** Make Password input controlled  
+React should know the password value
+
+- **D2** Add password state with `useState`  
+- Inside Login() add ONE line, just below email state: 
+
+const [password, setPassword] = useState("");
+
+- **D3** Update password input with value and onChange  
+
+From: 
+<input
+  type="password"
+  className="w-full border px-3 py-2 rounded"
+  placeholder="Enter password"
+/>
+
+To: 
+<input
+  type="password"
+  className="w-full border px-3 py-2 rounded"
+  placeholder="Enter password"
+  value={password}
+  onChange={(e) => setPassword(e.target.value)}
+/>
+
+- **D4** Update `handleSubmit` to log password 
+
+From: 
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  event.preventDefault();
+  console.log("Email:", email);
+};
+
+To: 
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  event.preventDefault();
+  console.log("Email:", email);
+  console.log("Password:", password);
+};
+
+- **D5** Test email and password logging  
+You can type in Email
+You can type in Password
+Click Login
+Console shows:
+Email: your@email.com
+Password: yourpassword
