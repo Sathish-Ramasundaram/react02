@@ -137,6 +137,8 @@ App does not break completely
 
 10. useMemo
 
+useMemo is a React hook used to cache (memoize) a calculated value so React doesn’t recompute it on every render unless needed.
+
 Understand what problem useMemo solves
 and why overusing it is a mistake.
 We’ll:
@@ -254,3 +256,146 @@ Type in input
 Click “Increment Count”
 ✅ Calculation runs
 ⏳ UI updates with delay
+
+19. Without useMemo
+When text state changes
+✔ component renders
+✔ slow calculation runs
+
+With UseMemo
+
+When text state changes
+→ component still re-renders ✅
+→ BUT slowCalculation is skipped ✅
+Means,
+✔ component renders
+❌ slow calculation does NOT run
+
+20. Optional, try another example: 
+
+Add another slow function
+
+```
+
+type CartItem = {
+  id: number;
+  name: string;
+  price: number;
+  qty: number;
+};
+
+function calculateCartTotal(items: CartItem[]) {
+  console.log("Calculating cart total...");
+  
+  // simulate heavier business logic
+  let total = 0;
+  for (let item of items) {
+    for (let i = 0; i < 500000; i++) {} // fake load 500000000
+    total += item.price * item.qty;
+  }
+
+  return total;
+}
+
+
+```
+
+// --- Cart example states ---
+const [cartItems, setCartItems] = useState<CartItem[]>([
+  { id: 1, name: "Laptop", price: 50000, qty: 1 },
+  { id: 2, name: "Mouse", price: 500, qty: 2 },
+  { id: 3, name: "Keyboard", price: 1500, qty: 1 },
+]);
+
+const [billingAddress, setBillingAddress] = useState("");
+
+
+-----
+
+First without useMemo: 
+
+const cartTotal = calculateCartTotal(cartItems);
+
+With useMemo:
+
+const cartTotal = useMemo(() => {
+  return calculateCartTotal(cartItems);
+}, [cartItems]);
+
+
+
+-----
+Add UI
+<hr className="my-6" />
+
+<h2 className="text-xl font-bold">Checkout Section (useMemo Real Example)</h2>
+
+<p className="mt-2">Cart Total: ₹ {cartTotal}</p>
+
+<button
+  onClick={() =>
+    setCartItems(items =>
+      items.map(i =>
+        i.id === 1 ? { ...i, qty: i.qty + 1 } : i
+      )
+    )
+  }
+  className="mt-2 bg-green-600 text-white px-4 py-2 rounded"
+>
+  Add one more Laptop
+</button>
+
+<br /><br />
+
+<input
+  value={billingAddress}
+  onChange={(e) => setBillingAddress(e.target.value)}
+  placeholder="Type billing address"
+  className="border p-2 w-full"
+/>
+
+
+Test: 
+
+Next with useMemo:
+
+Replace both calculation: 
+
+const calculatedValue = useMemo(() => {
+  return slowCalculation(count);
+}, [count]);
+
+
+const cartTotal = useMemo(() => {
+  return calculateCartTotal(cartItems);
+}, [cartItems]);
+
+
+------------------
+
+Test: 
+
+
+
+useMemo caches the calculated cart total so it only recomputes when cartItems change, not when you type in the billing address.
+This keeps the UI responsive by skipping unnecessary recalculation during unrelated state updates.
+
+
+What does Render mean?
+
+Render means React runs your component function and prepares the UI output.
+
+When React renders, it:
+1️⃣ calls the function
+2️⃣ runs all code inside it
+3️⃣ reads the returned JSX
+4️⃣ compares with previous UI
+5️⃣ updates the screen if needed
+
+The whole process is called render
+
+Render happens when:
+state changes
+props change
+parent re-renders
+context changes

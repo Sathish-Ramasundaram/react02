@@ -369,6 +369,9 @@ import { useState } from "react";
 
 below register() {, -----
 const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [confirmPassword, setConfirmPassword] = useState("");
+
 
 Add submit handler, ----
 const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -396,27 +399,6 @@ email input to -----
 />
 
 
-Expected Output: 
-Open /register
-Type an email
-Click Register or press Enter
-Result:
-❌ No page refresh
-✅ Console shows:
-Register email: test@example.com
-
-- **E13** Controlled password and confirm password inputs in Register page  
-Goal: 
-On /register:
-React should know password
-React should know confirmPassword
-Typing should work normally
-Submit should log all three values
-
------ add email state ----
-const [password, setPassword] = useState("");
-const [confirmPassword, setConfirmPassword] = useState("");
-
 ---- Make password input controlled
 To: 
 <input
@@ -438,6 +420,7 @@ To:
 />
 
 ---- update handleSubmit To: 
+
 const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
   event.preventDefault();
   console.log("Email:", email);
@@ -519,6 +502,7 @@ Email: test@example.com
 import { Link } from "react-router-dom";
 
 --- Below register button, 
+
 <div className="mt-4 text-center">
   <Link
     to="/"

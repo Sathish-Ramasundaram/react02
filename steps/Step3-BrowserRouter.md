@@ -1,5 +1,5 @@
 - **A** Install `react-router-dom`  
-  npm install react-router-dom
+npm install react-router-dom
 
 npm → Node Package Manager
 install → install a package
@@ -10,8 +10,6 @@ Multiple pages in a single-page app (SPA)
 URL changes without full page reload
 Navigation like /login, /dashboard, /profile
 
-Example:
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 - **B13** BrowserRouter explanation  
 BrowserRouter is the component that enables routing in a React app.
@@ -19,6 +17,7 @@ It allows your React app to change pages using URLs without reloading the page.
 
 - **B14** Update `App.tsx` with BrowserRouter wrapper 
 ```
+
 import { BrowserRouter } from "react-router-dom";
 
 ---
@@ -64,8 +63,8 @@ Refresh /login → 404
 
 ✅ With historyApiFallback: true
 /
-/login
-/dashboard
+/login -> if you donot have this page, it will go to main page. 
+/dashboard -> -> if you donot have this page, it will go to main page. 
 Refresh anywhere → always works
 
 - **B15** Update `App.tsx` with Routes and Route  
@@ -102,6 +101,8 @@ path="/" Match the root URL - http://localhost:3000/
 later: /register
 /forgot-password
 /dashboard
+
+Now, if you search other page, it will show blank page. 
 
 element={...} 
 element expects JSX. NOT a component name. NOT a string
@@ -203,6 +204,7 @@ To:
 type nul > src/pages/Register.tsx
 
 ```
+
 function Register() {
   return (
     <h1 className="text-2xl font-bold text-purple-600">
@@ -225,6 +227,8 @@ replace with,
 - **B26** create ForgotPassword.tsx inside src/pages/ and paste the below code 
 type nul >src/pages/ForgotPassword.tsx
 
+```
+
 function ForgotPassword() {
   return (
     <h1 className="text-2xl font-bold text-red-600">
@@ -235,18 +239,12 @@ function ForgotPassword() {
 
 export default ForgotPassword;
 
-- **B27** Update `App.tsx` to use ForgotPassword page  
-
-import ForgotPassword from './pages/ForgotPassword';
-
-replace with:
-<Route path="/forgot-password" element={<ForgotPassword />} />
-
-- **B28** Test ForgotPassword route  
-
+```
 - **B29** create Dashboard.tsx inside src/pages/ and paste the below code 
 
 type nul >src/pages/Dashboard.tsx  
+
+```
 
 function Dashboard() {
   return (
@@ -258,11 +256,16 @@ function Dashboard() {
 
 export default Dashboard;
 
-- **B30** Update `App.tsx` to use Dashboard page  
+```
 
+
+- **B27** Update `App.tsx` to use ForgotPassword page and Dashboard page 
+
+import ForgotPassword from './pages/ForgotPassword';
 import Dashboard from './pages/Dashboard';
 
-replace with: 
+replace with:
+<Route path="/forgot-password" element={<ForgotPassword />} />
 <Route path="/dashboard" element={<Dashboard />} />
 
-- **B31** Test Dashboard route  
+- **B31** Test ForgotPassword and Dashboard route  

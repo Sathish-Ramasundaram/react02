@@ -17,7 +17,7 @@ npm init -y
 npm install react react-dom
 
 7. Set up Rspack
-   npm install -D @rspack/core @rspack/cli @rspack/dev-server @rspack/plugin-react-refresh react-refresh @rspack/plugin-html
+npm install -D @rspack/core @rspack/cli @rspack/dev-server @rspack/plugin-react-refresh react-refresh @rspack/plugin-html
 
 Bundler (Rspack) → ready
 Dev server → ready
@@ -25,20 +25,20 @@ Fast refresh → ready
 HTML injection → ready
 
 8. Install TypeScript and React type definitions
-   npm install -D typescript @types/react @types/react-dom
+npm install -D typescript @types/react @types/react-dom
 
 9. Create the public folder
-   mkdir public
+mkdir public
 
 10. Create the src folder
-    mkdir src
+mkdir src
 
 11. Create the `index.html` file inside `public`  
-    type nul > public\index.html
-
-    Paste code inside `public/index.html`
+    
+type nul > public\index.html
 
 ```
+
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -54,6 +54,7 @@ HTML injection → ready
 ```
 
 12. Create the `index.tsx` file inside `src`  
+
     type nul > src\index.tsx
 
 Paste code inside `src/index.tsx`
@@ -190,11 +191,22 @@ Shift + Alt + F ---> Align the code
   You see
   Test from index.tsx
 
+  Note: 
+  During development:
+npm run dev   ← use this daily
+
+Before deployment:
+npm run build ← only when needed
+
+- Stop the current process  
+  ctrl + c
+
 
 - **A6** Create `App.tsx` inside `src`
   type nul > src\App.tsx
 
 ```
+
 function App() {
   return (
     <div>
@@ -216,8 +228,7 @@ root.render(
     <App />
 ```
 
-- **A8** Stop the current process  
-  ctrl + c
+
 
 - **A9** Run development server again  
   npm run dev

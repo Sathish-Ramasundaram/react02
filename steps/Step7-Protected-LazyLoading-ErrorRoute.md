@@ -40,6 +40,10 @@ function ProtectedRoute({ children }: ProtectedRouteProps) {
 export default ProtectedRoute;
 
 ```
+
+Routes define which page loads for each URL. Links/Navigate/useNavigate are used to move between pages.
+
+
 4. Explanation: 
 children: ReactNode
 This allows usage like:

@@ -5,6 +5,10 @@
 npm install -D tailwindcss@3.4.17 postcss autoprefixer
 npm install -D @tailwindcss/postcss
 
+or
+npm install -D tailwindcss@3.4.17 postcss autoprefixer @tailwindcss/postcss
+
+
 Install CSS loader dependencies
 npm install -D style-loader css-loader postcss-loader
 
@@ -45,6 +49,7 @@ type nul > src/index.css
 
 - **B7** Paste Tailwind directives into `index.css`  
 ```
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -147,7 +152,7 @@ function App() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <h1 className="text-2xl font-bold text-blue-600">
-        Tailwind is working 🚀
+        If Tailwind is working, you will see this text in the center. background gray. Bold font. Text in blue
       </h1>
     </div>
   );

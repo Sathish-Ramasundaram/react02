@@ -1,5 +1,7 @@
 - **C1** Update `Login.tsx` form structure  
+
 ```
+
 function Login() {
   return (
     <form className="w-80 bg-white p-6 rounded shadow">
@@ -145,6 +147,7 @@ To:
 - **C6** Test form submission prevention  
 
 - update the button className for visual difference:
+
     <button
         type="submit"
         className="w-full bg-blue-600 text-white py-2 rounded
@@ -153,8 +156,8 @@ To:
     hover:bg-blue-700
     active:bg-blue-800
     active:scale-95
-  "
-      >
+  ">
+
 This is Tailwind only: 
 className="w-full bg-blue-600 text-white py-2 rounded transition duration-150 hover:bg-blue-700 active:bg-blue-800 active:scale-95"
 
@@ -237,6 +240,9 @@ onChange={(e) => setEmail(e.target.value)}
   value={email}
   onChange={(e) => setEmail(e.target.value)}
 />
+
+onChange={(e) => setEmail(e.target.value)}
+Whenever the user types in this input box, update the email state with the new value.
 
 User types → onChange fires
 e.target.value → what user typed
