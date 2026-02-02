@@ -13,16 +13,23 @@ type AuthProviderProps = {
 };
 
 function AuthProvider({ children }: AuthProviderProps) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(
+  localStorage.getItem("auth") === "true"
+);
 
 
-  const login = () => {
-    setIsAuthenticated(false);
-  };
 
-  const logout = () => {
-    setIsAuthenticated(true);
-  };
+const login = () => {
+  setIsAuthenticated(true);
+  localStorage.setItem("auth", "true");
+};
+
+
+const logout = () => {
+  setIsAuthenticated(false);
+  localStorage.removeItem("auth");
+};
+
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, logout }}>

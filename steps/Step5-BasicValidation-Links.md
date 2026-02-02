@@ -1,5 +1,4 @@
 
-
 - **D6** Add basic validation goal  
 When user clicks Login:
 If email or password is empty → show a message
@@ -38,6 +37,7 @@ const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 
   setError("");
   console.log("Login successful");
+
   console.log("Email:", email);
   console.log("Password:", password);
 };
@@ -376,7 +376,9 @@ const [confirmPassword, setConfirmPassword] = useState("");
 Add submit handler, ----
 const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
   event.preventDefault();
-  console.log("Register email:", email);
+  console.log("Email:", email);
+  console.log("Password:", password);
+  console.log("Confirm Password:", confirmPassword);
 };
 
 (Strikethrough warning is OK, as discussed.)
@@ -419,14 +421,6 @@ To:
   onChange={(e) => setConfirmPassword(e.target.value)}
 />
 
----- update handleSubmit To: 
-
-const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  event.preventDefault();
-  console.log("Email:", email);
-  console.log("Password:", password);
-  console.log("Confirm Password:", confirmPassword);
-};
 
 - **E14** Test Register form with all controlled inputs  
 EXPECTED OUTPUT (VERIFY)
@@ -525,13 +519,5 @@ import { Link } from "react-router-dom";
     Don’t have an account? Register
   </Link>
 </div>
-
-
-
-
-
-
-
-
 
 

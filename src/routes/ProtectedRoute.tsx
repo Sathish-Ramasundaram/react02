@@ -1,19 +1,24 @@
-import { ReactNode, useContext } from "react";
-import { Navigate } from "react-router-dom";
-import AuthContext from "../context/AuthContext";
+import { ReactNode, useContext } from 'react';
+import { Navigate } from 'react-router-dom';
+import AuthContext from '../context/AuthContext';
 
 type ProtectedRouteProps = {
   children: ReactNode;
 };
 
 function ProtectedRoute({ children }: ProtectedRouteProps) {
+  const DEV_BYPASS = true;
 
   const auth = useContext(AuthContext);
 
+  // if (!auth?.isAuthenticated) {
+  //   return <Navigate to="/" replace />;
+  // }
 
-if (!auth?.isAuthenticated) {
+  if (!DEV_BYPASS && !auth?.isAuthenticated) {
   return <Navigate to="/" replace />;
 }
+
 
   return children;
 }

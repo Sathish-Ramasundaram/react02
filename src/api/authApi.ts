@@ -1,14 +1,27 @@
 export async function loginApi(email: string, password: string) {
-  console.log("loginApi called with:");
-  console.log("Email:", email);
-  console.log("Password:", password);
+  const response = await fetch("http://localhost:4000/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+  });
 
-   // ⏳ Artificial delay (2 seconds)
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  const data = await response.json();
 
-  if (email !== "test@example.com") {
-    throw new Error("Invalid credentials");
+  if (!response.ok) {
+    throw new Error(data.message || "Login failed");
   }
 
-  return { success: true };
+  return data;
+}
+
+
+export async function fetchMe() {
+  const res = await fetch("http://localhost:4000/me");
+  if (!res.ok) throw new Error("Failed to fetch profile");
+  return res.json();
 }

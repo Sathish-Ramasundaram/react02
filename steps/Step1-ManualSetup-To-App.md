@@ -16,16 +16,16 @@ npm init -y
 6. Install React core libraries
 npm install react react-dom
 
-7. Set up Rspack
+7. Install TypeScript and React type definitions
+npm install -D typescript @types/react @types/react-dom
+
+8. Set up Rspack
 npm install -D @rspack/core @rspack/cli @rspack/dev-server @rspack/plugin-react-refresh react-refresh @rspack/plugin-html
 
 Bundler (Rspack) → ready
 Dev server → ready
 Fast refresh → ready
 HTML injection → ready
-
-8. Install TypeScript and React type definitions
-npm install -D typescript @types/react @types/react-dom
 
 9. Create the public folder
 mkdir public
@@ -86,7 +86,7 @@ HTMLElement | null
 
 
 13. Create the Rspack configuration file in the root  
-    type nul > rspack.config.js
+type nul > rspack.config.js
 
 Paste code into `rspack.config.js`
 

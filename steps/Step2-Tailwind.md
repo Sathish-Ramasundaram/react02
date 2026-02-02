@@ -5,12 +5,13 @@
 npm install -D tailwindcss@3.4.17 postcss autoprefixer
 npm install -D @tailwindcss/postcss
 
-or
-npm install -D tailwindcss@3.4.17 postcss autoprefixer @tailwindcss/postcss
-
-
 Install CSS loader dependencies
 npm install -D style-loader css-loader postcss-loader
+
+or
+Merged command: 
+
+npm install -D tailwindcss@3.4.17 postcss autoprefixer @tailwindcss/postcss style-loader css-loader postcss-loader
 
 2. 
 type nul > tailwind.config.js

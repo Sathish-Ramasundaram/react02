@@ -71,7 +71,7 @@ npm run dev
 
 
 Open Login page
-Click Login (even with empty fields)
+Click Login 
 Open Browser Console
 
 ✅ Expected output

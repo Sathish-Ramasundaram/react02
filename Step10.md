@@ -1,7 +1,7 @@
-21. Tiny Goal: 
-When login is in progress:
-Button is disabled
-Button text changes to “Logging in…”
+21. Tiny Goal:
+    When login is in progress:
+    Button is disabled
+    Button text changes to “Logging in…”
 
 Update: Login.tsx
 
@@ -9,50 +9,46 @@ const [loading, setLoading] = useState(false);
 
 22. Set loading true before API call
 
-To: 
+To:
 
 if (!email || !password) {
-  setError("Email and Password are required");
-  return;
+setError("Email and Password are required");
+return;
 }
 
 setLoading(true);
 
 try {
-  const result = await loginApi(email, password);
-  setError("");
-  console.log("API result:", result);
+const result = await loginApi(email, password);
+setError("");
+console.log("API result:", result);
 } catch (err: any) {
-  setError(err.message);
+setError(err.message);
 } finally {
-  setLoading(false);
+setLoading(false);
 }
-
 
 ⚠️ finally is important — it runs success or error.
 
-
-
 23. Update your Login button:
 
-To: 
+To:
 
 <button
-  type="submit"
-  disabled={loading}
-  className={`w-full py-2 rounded text-white
+type="submit"
+disabled={loading}
+className={`w-full py-2 rounded text-white
     ${loading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"}
   `}
->
-  {loading ? "Logging in..." : "Login"}
-</button>
 
+> {loading ? "Logging in..." : "Login"}
+> </button>
 
-24.  Test (important)
-Case 1 — Click Login
-Button text changes to Logging in…
-Button becomes disabled
-No double clicks possible
+24. Test (important)
+    Case 1 — Click Login
+    Button text changes to Logging in…
+    Button becomes disabled
+    No double clicks possible
 
 Case 2 — Error happens
 Error message shows
@@ -61,8 +57,6 @@ Button re-enables
 Case 3 — Success
 Button re-enables
 No error shown
-
-
 
 Right now, your loginApi finishes instantly:
 return { success: true };
@@ -82,25 +76,23 @@ TINY ADJUSTMENT (ONLY FOR LEARNING)
 
 Add delay to loginApi (src/api/authApi.ts)
 
-To: 
+To:
 export async function loginApi(email: string, password: string) {
-  console.log("loginApi called with:");
-  console.log("Email:", email);
-  console.log("Password:", password);
+console.log("loginApi called with:");
+console.log("Email:", email);
+console.log("Password:", password);
 
-  // ⏳ Artificial delay (2 seconds)
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+// ⏳ Artificial delay (2 seconds)
+await new Promise((resolve) => setTimeout(resolve, 2000));
 
-  if (email !== "test@example.com") {
-    throw new Error("Invalid credentials");
-  }
-
-  return { success: true };
+if (email !== "test@example.com") {
+throw new Error("Invalid credentials");
 }
 
+return { success: true };
+}
 
 ⚠️ This delay is intentional and temporary.
-
 
 Now test Case 1 (again)
 Open Login page
@@ -120,9 +112,9 @@ Later, when we use a real API,
 
 It exists only to teach loading state.
 
-25. Tiny Goal: 
-Know when login succeeded
-Just store success in local state so the UI knows login worked.
+25. Tiny Goal:
+    Know when login succeeded
+    Just store success in local state so the UI knows login worked.
 
 Update Login.tsx:
 
@@ -131,22 +123,22 @@ const [isSuccess, setIsSuccess] = useState(false);
 update it like this:
 
 try {
-  const result = await loginApi(email, password);
-  setError("");
-  setIsSuccess(true); // ✅ mark success
-  console.log("API result:", result);
+const result = await loginApi(email, password);
+setError("");
+setIsSuccess(true); // ✅ mark success
+console.log("API result:", result);
 } catch (err: any) {
-  setError(err.message);
-  setIsSuccess(false); // optional but safe
+setError(err.message);
+setIsSuccess(false); // optional but safe
 } finally {
-  setLoading(false);
+setLoading(false);
 }
 
-
 26. Show success message (temporary)
-Just above the form, add this JSX:
+    Just above the form, add this JSX:
 
 {isSuccess && (
+
   <p className="mb-3 text-sm text-green-600">
     Login successful
   </p>
@@ -154,20 +146,20 @@ Just above the form, add this JSX:
 
 Note: Put the fragment after return, otherwise, you will get error.
 {isSuccess && (...)} → one element
+
 <form>...</form> → another element
 JSX doesn’t allow siblings at the top level like this.
-So, fragment is needed. 
+So, fragment is needed.
 
 <>...</> is a Fragment
 
-27. Tiny Goal: 
-When login succeeds, mark the user as logged in globally
-Just prove global state works
-
+27. Tiny Goal:
+    When login succeeds, mark the user as logged in globally
+    Just prove global state works
 
 28. Update AuthContext.tsx
 
-Replace everything with this: 
+Replace everything with this:
 
 ```
 
@@ -223,36 +215,35 @@ Any component can now read or change auth
 import { useState, useContext } from 'react';
 import AuthContext from "../context/AuthContext";
 
------
+---
 
 Get login function
 Inside the Login component, add:
 
 const auth = useContext(AuthContext);
 
-----
+---
 
 Call login() on success
 Inside your try block, after success, add:
 
 auth?.login();
 
-it becomes: 
+it becomes:
 
 try {
-  const result = await loginApi(email, password);
-  setError("");
-  setIsSuccess(true);
-  auth?.login(); // ✅ global auth update
+const result = await loginApi(email, password);
+setError("");
+setIsSuccess(true);
+auth?.login(); // ✅ global auth update
 } catch (err: any) {
-  setError(err.message);
-  setIsSuccess(false);
+setError(err.message);
+setIsSuccess(false);
 } finally {
-  setLoading(false);
+setLoading(false);
 }
 
-
-30. Test: 
+30. Test:
 
 Login with:
 test@example.com
@@ -269,8 +260,8 @@ Removed fake auth
 Built real authentication flow
 This is production-grade architecture.
 
-31. Tiny Goal: 
-After successful login, automatically go to /dashboard
+31. Tiny Goal:
+    After successful login, automatically go to /dashboard
 
 React Router gives us a hook called useNavigate.
 
@@ -278,37 +269,35 @@ update Login.tsx:
 
 import { Link, useNavigate } from 'react-router-dom';
 
------
+---
 
 Inside the Login component, add:
 const navigate = useNavigate();
-
 
 So now you have:
 auth → global login
 navigate → routing
 
-----
+---
 
 Redirect on success
 Inside your try block, after auth?.login(), add:
 navigate("/dashboard");
 
-it becomes: 
+it becomes:
 
 try {
-  const result = await loginApi(email, password);
-  setError("");
-  setIsSuccess(true);
-  auth?.login();
-  navigate("/dashboard"); // ✅ redirect
+const result = await loginApi(email, password);
+setError("");
+setIsSuccess(true);
+auth?.login();
+navigate("/dashboard"); // ✅ redirect
 } catch (err: any) {
-  setError(err.message);
-  setIsSuccess(false);
+setError(err.message);
+setIsSuccess(false);
 } finally {
-  setLoading(false);
+setLoading(false);
 }
-
 
 32. Test (important)
 
@@ -335,106 +324,114 @@ ProtectedRoute allows access
 No race conditions
 
 ---
+
 33. I want to make the dashboard status false and demonstrate to my trainee that is not taking in and it is protected
 
 src/context/AuthContext.tsx
 
-From: 
+From:
 const login = () => {
-  setIsAuthenticated(true);
+setIsAuthenticated(true);
 };
 
-To: 
+To:
 const login = () => {
-  setIsAuthenticated(false); // 👈 force false
+setIsAuthenticated(false); // 👈 force false
 };
 
-
-
-----
+---
 
 Open ProtectedRoute.tsx
 
-From: 
+From:
 const isAuthenticated = useContext(AuthContext);
 
 if (!isAuthenticated) {
-  return <Navigate to="/" replace />;
+return <Navigate to="/" replace />;
 }
 
-
-To: 
+To:
 const auth = useContext(AuthContext);
 
 if (!auth?.isAuthenticated) {
-  return <Navigate to="/" replace />;
+return <Navigate to="/" replace />;
 }
 
-And test now. 
+And test now.
 
 After test, change back the above AuthContext code and do not change this ProtectedRoute one
 This code is now the correct and final version.
 
-34. 
+34. update Dashboard:
 
+From:
+const isAuthenticated = useContext(AuthContext);
 
-Next Recommonded plan: 
+To:
+const auth = useContext(AuthContext);
+if (!auth) return null;
+const { isAuthenticated, logout } = auth;
 
-🧭 NEXT ACTION PLAN (SHORT & CLEAR)
-1️⃣ Backend (Your own REST API)
+This line already exists and now becomes correct automatically:
 
-Create a small Node + Express server
+<p>{isAuthenticated ? 'Logged In' : 'Logged Out'}</p>
+No edit needed — now it uses real boolean.
 
-One endpoint only: POST /login
+Add this log out at the bottom inside <div>:
 
-Return success / error JSON
+<button
+onClick={logout}
+className="mt-4 bg-red-600 text-white px-4 py-2 rounded"
 
-Add CORS
+> Logout
+> </button>
 
-2️⃣ Connect React → Your API
+35. Test:
+    After clicking log out button, it is redirect to hoome page.
 
-Replace ReqRes URL with your local API
+As it is too fast, we are adding this below code to visualize the slow loggout.
 
-Reuse existing loginApi
+Update Dashboard:
+const [showLoggedOut, setShowLoggedOut] = useState(false);
 
-Verify loading, error, success still work
+From:
 
-3️⃣ Auth Improvements
+<p>{isAuthenticated ? 'Logged In' : 'Logged Out'}</p>
 
-Store token in memory (later: localStorage)
+To:
 
-Add logout button
+<p>
+  {showLoggedOut ? 'Logging Out' : isAuthenticated ? 'Logged In' : 'Logged Out'}
+</p>
 
-Protect /dashboard properly
+Replace the log out button:
 
-4️⃣ Redux + Saga (Next Big Topic)
+<button
+onClick={() => {
+setShowLoggedOut(true);
 
-Move login logic from component → saga
+    setTimeout(() => {
+      logout();
+    }, 1000);
 
-Use takeLatest, call, put
+}}
+className="mt-4 bg-red-600 text-white px-4 py-2 rounded"
 
-Handle API errors in saga
+> Logout
+> </button>
 
-5️⃣ Testing
+- Test now.
 
-Unit test login form
+- For Dashboard visual set up use this.
 
-Test protected routes
+Put this in main div
 
-Add basic coverage
+<div className="w-full min-h-screen relative flex items-center justify-center">
 
-6️⃣ Wrap-up
+Create and use this div for counter
 
-Clean code
+<div className="bg-white p-6 rounded shadow w-96">
 
-Trainee explanation notes
+create and use this div for auth
 
-README update
-
-35. 
-36. 
-37. 
-38. 
-39. 
-40. 
-
+<div className="absolute top-4 right-4 text-right">

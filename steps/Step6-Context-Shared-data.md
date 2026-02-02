@@ -220,9 +220,18 @@ type nul > src/pages/News.tsx
 
 Paste this
 
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext";
+
 function News() {
+
+  const isAuthenticated = useContext(AuthContext);
+
   return (
     <div>
+      <h1>Auth Status:</h1>
+      <p>{isAuthenticated ? "Logged In" : "Logged Out"}</p>
+
       <h1 className="text-2xl font-bold text-purple-600">
         News Page Working
       </h1>
@@ -239,24 +248,6 @@ import News from "./pages/News";
 And ---
 
 <Route path="/news" element={<News />} />
-
-8. Update News.tsx
-
-import { useContext } from "react";
-import AuthContext from "../context/AuthContext";
-
---- inside function News() {  -----
-    const isAuthenticated = useContext(AuthContext);
-
-then: 
-    <div>
-      <h1>Auth Status:</h1>
-      <p>{isAuthenticated ? "Logged In" : "Logged Out"}</p>
-
-      <h1 className="text-2xl font-bold text-purple-600">
-        News Page Working
-      </h1>
-    </div>
 
 9. Test. Auth Status is shared data and it is received by Dashboard and News.
 
