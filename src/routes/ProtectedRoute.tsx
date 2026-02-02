@@ -7,17 +7,19 @@ type ProtectedRouteProps = {
 };
 
 function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const DEV_BYPASS = true;
-
+  
   const auth = useContext(AuthContext);
 
-  // if (!auth?.isAuthenticated) {
-  //   return <Navigate to="/" replace />;
-  // }
+  const DEV_BYPASS = true;
 
-  if (!DEV_BYPASS && !auth?.isAuthenticated) {
-  return <Navigate to="/" replace />;
-}
+  
+  if (!auth?.isAuthenticated) {
+    return <Navigate to="/" replace />;
+  }
+
+//   if (!DEV_BYPASS && !auth?.isAuthenticated) {
+//   return <Navigate to="/" replace />;
+// }
 
 
   return children;

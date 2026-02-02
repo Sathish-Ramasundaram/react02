@@ -28,8 +28,9 @@ function Register() {
       {error && <p className="mb-3 text-sm text-red-600">{error}</p>}
 
       <div className="mb-3">
-        <label className="block mb-1 text-sm">Email</label>
+        <label htmlFor="email" className="block mb-1 text-sm">Email</label>
         <input
+          id="email"
           type="email"
           className="w-full border px-3 py-2 rounded"
           placeholder="Enter email"

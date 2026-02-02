@@ -12,6 +12,10 @@ export async function loginApi(email: string, password: string) {
 
   const data = await response.json();
 
+  // ⏳ Artificial delay (2 seconds)
+await new Promise((resolve) => setTimeout(resolve, 2000));
+
+
   if (!response.ok) {
     throw new Error(data.message || "Login failed");
   }
