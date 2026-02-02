@@ -137,7 +137,7 @@ App does not break completely
 
 10. useMemo
 
-useMemo is a React hook used to cache (memoize) a calculated value so React doesn’t recompute it on every render unless needed.
+useMemo is a React hook that stores (remembers) a calculated value and only recalculates it when its dependencies change, so unnecessary recalculations are avoided.
 
 Understand what problem useMemo solves
 and why overusing it is a mistake.
@@ -173,6 +173,7 @@ import { useContext, useState } from "react";
 Inside Dashboard function: ---
 
 function Dashboard() {
+
   const [count, setCount] = useState(0);
   const [text, setText] = useState("");
 
@@ -180,8 +181,6 @@ function Dashboard() {
 
 
 ----Inside Return
-
-
 
       <p>Calculated value: {calculatedValue}</p>
 
@@ -202,6 +201,10 @@ function Dashboard() {
         onChange={(e) => setText(e.target.value)}
         placeholder="Type here"
       />
+
+Fragment: 
+<>
+</>
 
 14. Test 
 Open /dashboard
@@ -326,6 +329,7 @@ const cartTotal = useMemo(() => {
 
 -----
 Add UI
+
 <hr className="my-6" />
 
 <h2 className="text-xl font-bold">Checkout Section (useMemo Real Example)</h2>

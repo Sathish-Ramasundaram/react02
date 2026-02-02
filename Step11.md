@@ -106,7 +106,6 @@ npm init -y
 
 
 Install Express + CORS
-
 npm install express cors
 
 Why:
@@ -355,6 +354,19 @@ import { fetchMe } from "../api/authApi";
 -----
 
 const [profile, setProfile] = useState<any>(null);
+
+
+<any> tells TypeScript:
+“This state can hold any type of value — don’t do type checking here.”
+So profile can become:
+string
+number
+object
+array
+boolean
+anything at all
+TypeScript will not give errors for wrong usage.
+
 ----
 
 Add this block: 

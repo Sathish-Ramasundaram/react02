@@ -35,14 +35,14 @@ setLoading(false);
 To:
 
 <button
-type="submit"
-disabled={loading}
-className={`w-full py-2 rounded text-white
-    ${loading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"}
+        type="submit"
+        disabled={loading}
+        className={`w-full py-2 rounded text-white
+    ${loading ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'}
   `}
-
-> {loading ? "Logging in..." : "Login"}
-> </button>
+      >
+        {loading ? 'Logging in...' : 'Login'}
+      </button>
 
 24. Test (important)
     Case 1 — Click Login
@@ -373,7 +373,6 @@ if (!auth) return null;
 const { isAuthenticated, logout } = auth;
 
 This line already exists and now becomes correct automatically:
-
 <p>{isAuthenticated ? 'Logged In' : 'Logged Out'}</p>
 No edit needed — now it uses real boolean.
 
@@ -381,13 +380,13 @@ Add this log out at the bottom inside <div>:
 
 <button
 onClick={logout}
-className="mt-4 bg-red-600 text-white px-4 py-2 rounded"
+className="mt-4 bg-red-600 text-white px-4 py-2 rounded">
 
-> Logout
-> </button>
+Logout
+</button>
 
 35. Test:
-    After clicking log out button, it is redirect to hoome page.
+    After clicking log out button, it is redirect to home page.
 
 As it is too fast, we are adding this below code to visualize the slow loggout.
 
@@ -415,10 +414,10 @@ setShowLoggedOut(true);
     }, 1000);
 
 }}
-className="mt-4 bg-red-600 text-white px-4 py-2 rounded"
+className="mt-4 bg-red-600 text-white px-4 py-2 rounded">
 
-> Logout
-> </button>
+Logout
+</button>
 
 - Test now.
 

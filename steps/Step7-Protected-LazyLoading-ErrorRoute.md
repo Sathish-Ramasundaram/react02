@@ -55,12 +55,14 @@ This allows usage like:
 So ProtectedRoute does not render UI —
 it decides whether UI is allowed.
 
-5. Update App.tsx
+5. Update App.tsx ------------
 ----
 import ProtectedRoute from "./routes/ProtectedRoute";
 ---
 update Dashboard route only:
+
 To: 
+
 <Route
   path="/dashboard"
   element={
@@ -265,3 +267,4 @@ No page reload
 
 Eg: /abc will be reloaded. 
 In a React SPA, direct URL access or refresh causes a full page reload, but navigation via React Router links is handled client-side without reload
+

@@ -132,6 +132,9 @@ const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
   }
 
   loginApi(email, password);
+
+  setError("");
+  
 };
 
 ```
