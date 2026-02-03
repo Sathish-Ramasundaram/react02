@@ -8,7 +8,7 @@ This repository demonstrates a simple authentication flow (Login, Register, Forg
 
 ## 🚀 Quick Overview
 
-- Tech: **React (FC)**, **TypeScript**, **Rspack**, **Tailwind CSS**, **React Router**
+- Tech: **React (FC)**, **TypeScript**, **Rspack**, **Tailwind CSS**, **React Router**, **Redux + redux-saga**
 - Pages: `Login`, `Register`, `ForgotPassword`, `Dashboard`
 - Focus: learn React fundamentals by building small, testable units
 
@@ -16,21 +16,53 @@ This repository demonstrates a simple authentication flow (Login, Register, Forg
 
 ## ▶️ Quickstart
 
+**Requirements**
+
+- Node.js (recommended >= 18)
+- npm (or yarn)
+
 ```bash
 # install deps
 npm install
 
-# dev server
+# dev server (Rspack)
 npm run dev
+
 # build for production
 npm run build
-# deploy (uses gh-pages)
-npm run deploy
+
+# deploy to GitHub Pages
+npm run predeploy && npm run deploy
+
+# run tests
+npm test
+
+# start demo API server (in another terminal)
+node server/server.js
 ```
 
 Live demo: https://Sathish-Ramasundaram.github.io/react02
 
-> Note: dev server runs via `rspack serve` (see `package.json` scripts)
+> Note: `npm run dev` uses `rspack serve` (see `package.json` scripts). The demo API runs on http://localhost:4000.
+
+---
+
+## 🧪 Tests & Coverage
+
+- Run tests: `npm test`
+- Generate coverage: `npm test -- --coverage` (coverage output is available in the `coverage/` folder)
+
+---
+
+## 🔧 Demo API
+
+The demo API in `server/server.js` provides a minimal auth endpoint used by the app during development.
+
+- Start it with: `node server/server.js`
+- Default API port: `4000`
+- Demo credentials (used by the app in dev):
+  - email: `admin@test.com`
+  - password: `1234`
 
 ---
 
@@ -53,6 +85,7 @@ src/
 - Controlled forms with basic validation
 - Client-side routing and protected route pattern
 - `AuthContext` provider (auth state + helper functions)
+- **Redux** + **redux-saga** for global state and async flows
 - Tailwind utility-first styling
 - Minimal, manual build setup (no CRA)
 
@@ -67,15 +100,9 @@ src/
 
 ---
 
-## 🔮 Roadmap / Next Steps
+## State management
 
-- Extract reusable `Input`, `Button`, `FormContainer` components ✅
-- Add token-based auth + protected routes
-- Integrate API mock / real backend
-- Add validation library (Zod), loading & error states
-- Add tests (Jest, React Testing Library) and E2E (Playwright)
-
----
+This project uses **Redux** for global state and **redux-saga** to handle async side-effects. See `src/redux/` (reducers, actions, sagas) and the `news` feature for a concrete example covering API calls, caching, and UI state management.
 
 ## Contributing
 
@@ -85,7 +112,7 @@ Small, focused PRs welcome — add a feature, tests, or refactor a page into reu
 
 ## License
 
-MIT
+ISC (see `package.json`)
 
 ---
 
