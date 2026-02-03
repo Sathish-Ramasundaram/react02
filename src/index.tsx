@@ -5,7 +5,7 @@ import { AuthProvider } from "./context/AuthContext";
 import ErrorBoundary from "./components/ErrorBoundary";
 import React from "react";
 import { Provider } from "react-redux";
-import { store } from "./store/store";
+import store from "./redux/store";
 
 
 
@@ -25,9 +25,9 @@ root.render(
   <React.StrictMode>
   <ErrorBoundary>
     <Provider store={store}>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </Provider>
   </ErrorBoundary>
   </React.StrictMode>

@@ -24,10 +24,7 @@ class ClassCounter extends React.PureComponent<{}, State> {
         >
           Class Increment
         </button>
-
-
-
-
+        
       </div>
     );
   }

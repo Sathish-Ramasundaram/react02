@@ -1,8 +1,7 @@
 import { useContext, useEffect } from 'react';
 import AuthContext from '../context/AuthContext';
 import NewsLoader from '../components/NewsLoader';
-import { useDispatch, useSelector } from "react-redux";
-
+import withAuthGuard from '../hoc/withAuthGuard';
 
 function News() {
   const auth = useContext(AuthContext);
@@ -11,53 +10,51 @@ function News() {
   const { isAuthenticated, logout } = auth;
 
   useEffect(() => {
-  console.log("News sees auth:", isAuthenticated);
-}, [isAuthenticated]);
+    console.log('News sees auth:', isAuthenticated);
+  }, [isAuthenticated]);
 
-console.log("AuthContext object:", AuthContext);
-
-const dispatch = useDispatch();
-const { news, loading } = useSelector((s: any) => s);
-
-useEffect(() => {
-  dispatch({ type: "NEWS_REQUEST" });
-}, []);
+  console.log('AuthContext object:', AuthContext);
 
 
 
   return (
-    <div>
+    <div className="flex min-h-screen">
+      <aside className="w-72 p-5">
+        <h3 className="text-lg font-semibold mb-4">Recent News</h3>
 
-      {loading && <p>Loading via Saga...</p>}
 
-<ul>
-  {news.map((n: any) => (
-    <li key={n.id}>{n.title}</li>
-  ))}
-</ul>
+        <NewsLoader>
+          {(news, loading) =>
+            loading ? (
+              <p className="text-sm text-gray-600">Loading...</p>
+            ) : (
+              <ul className="space-y-3">
+                {news.map((n) => (
+                  <li key={n.id}>
+                    <a
+                      href={n.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-blue-700 hover:underline text-sm"
+                    >
+                      {n.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )
+          }
+        </NewsLoader>
+      </aside>
 
       <div className="absolute top-4 right-4 text-right">
         <h1>Auth Status:</h1>
         <p>{isAuthenticated ? 'Logged In' : 'Logged Out'}</p>
       </div>
-
-      <NewsLoader>
-        {(news, loading) => {
-          if (loading) return <p>Loading news...</p>;
-
-          return (
-            <ul className="space-y-2">
-              {news.map((n) => (
-                <li key={n.id} className="font-bold text-red-600 text-lg">
-                  {n.title}
-                </li>
-              ))}
-            </ul>
-          );
-        }}
-      </NewsLoader>
     </div>
   );
 }
+
+// export default withAuthGuard(News);
 
 export default News;

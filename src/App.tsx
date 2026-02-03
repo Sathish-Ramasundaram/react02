@@ -6,6 +6,7 @@ import { lazy, Suspense } from 'react';
 import News from './pages/News';
 import ProtectedRoute from './routes/ProtectedRoute';
 import NotFound from './pages/NotFound';
+import ReduxNewsPage from "./pages/ReduxNewsPage";
 
 function App() {
   const Dashboard = lazy(() => import('./pages/Dashboard'));
@@ -20,21 +21,18 @@ function App() {
           <Route
             path="/dashboard"
             element={
-                      <ProtectedRoute>
-                      <Suspense fallback={<p>Loading Dashboard...</p>}>
+              <ProtectedRoute>
+                <Suspense fallback={<p>Loading Dashboard...</p>}>
                   <Dashboard />
                 </Suspense>
-
-                </ProtectedRoute>
-
-         
-    
-   
-              
+              </ProtectedRoute>
             }
           />
 
-          <Route path="/news" element={<News />} />
+          <Route path="/news" element={
+            
+            <News />} />
+            <Route path="/redux-news" element={<ReduxNewsPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
