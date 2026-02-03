@@ -10,7 +10,10 @@ Each = one responsibility.
 
 2. src/components inside this create: InputField.tsx
 
+type nul > src\components\InputField.tsx
+
 ```
+
 type Props = {
   label: string;
   value: string;
@@ -133,7 +136,6 @@ In modern React (your project style), we use:
 useEffect
 
 to handle lifecycle behavior.
-
 How to verify: Add this in Login
 
 import { useEffect } from "react";
@@ -355,48 +357,4 @@ count = 3 → calc = 3000 → prevCalc = 2000
 
 
 useRef remembers exactly what you put into .current, nothing more.
-
-19. 
-20. 
-21. 
-22. 
-23. 
-24.  
-25. 
-26. 
-27. 
-28. 
-29. 
-30. 
-31. 
-32. 
-33. 
-34. 
-35. 
-36. 
-37. 
-38. 
-39. 
-40. 
-41. 
-42. 
-43. 
-44. 
-45. 
-46. 
-47. 
-48. 
-49. 
-50.  
-51. 
-52. 
-53. 
-54. 
-55. 
-56. 
-57. 
-58. 
-59. 
-60. 
-
 

@@ -7,8 +7,7 @@ We want:
 a friendly fallback UI
 This is called an Error Boundary.
 
-2. 
-very important rule (don’t skip)
+2.  very important rule (don’t skip)
 
 👉 Error Boundaries can ONLY be class components
 Even in hook-first apps.
@@ -18,11 +17,10 @@ So:
 Your app stays functional & hooks-based
 Error Boundary is a tiny isolated class
 
-3. 
-They catch:
-render errors
-lifecycle errors
-constructor errors
+3.  They catch:
+    render errors
+    lifecycle errors
+    constructor errors
 
 They do NOT catch:
 event handlers
@@ -30,10 +28,10 @@ async code
 errors inside setTimeout
 (This is expected behavior.)
 
-4. Tiny Plan: 
-Create ErrorBoundary.tsx (class component)
-Wrap <App /> with it
-Simulate a crash to prove it works
+4. Tiny Plan:
+   Create ErrorBoundary.tsx (class component)
+   Wrap <App /> with it
+   Simulate a crash to prove it works
 
 5. Create src/components/ErrorBoundary.tsx
 
@@ -94,26 +92,25 @@ import ErrorBoundary from "./components/ErrorBoundary";
 --Update Render --
 
 root.render(
-  <ErrorBoundary>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
-  </ErrorBoundary>
+<ErrorBoundary>
+<AuthProvider>
+<App />
+</AuthProvider>
+</ErrorBoundary>
 );
-
 
 Order matters:
 ErrorBoundary should be outermost
 It protects everything inside
 
 7. Let’s intentionally crash a component.
-Add this line at the top of the function:
-For now, I add this inside Dasboard.tsx.
+   Add this line at the top of the function:
+   For now, I add this inside Dasboard.tsx.
 
 throw new Error("Dashboard crashed");
 
 8. Test
-if auth is true
+   if auth is true
 
 Open /dashboard
 Expected result:
@@ -131,9 +128,7 @@ Fallback UI shows
 App does not break completely
 
 9. Remove the throw new Error(...) line
-(It was only for testing.)
-
-
+   (It was only for testing.)
 
 10. useMemo
 
@@ -148,37 +143,34 @@ Fix it with useMemo
 See a wrong use case
 
 11. useMemo caches a calculated value
-so React doesn’t recompute it on every render.
-Important:
-It does NOT stop re-renders
-It only avoids recalculating expensive logic
+    so React doesn’t recompute it on every render.
+    Important:
+    It does NOT stop re-renders
+    It only avoids recalculating expensive logic
 
 12. open Dashboard.tsx
 
-At the top of the file, add:
+import { useContext, useState } from "react";
+
+Before Dashboard function: ------
 
 function slowCalculation(num: number) {
-  console.log("Running slow calculation...");
-  let result = 0;
-  for (let i = 0; i < 1_000_000_000; i++) {
-    result += num;
-  }
-  return result;
+console.log("Running slow calculation...");
+let result = 0;
+for (let i = 0; i < 1_000_000_000; i++) {
+result += num;
 }
-
-13. update this 
-To: 
-import { useContext, useState } from "react";
+return result;
+}
 
 Inside Dashboard function: ---
 
 function Dashboard() {
 
-  const [count, setCount] = useState(0);
-  const [text, setText] = useState("");
+const [count, setCount] = useState(0);
+const [text, setText] = useState("");
 
-  const calculatedValue = slowCalculation(count);
-
+const calculatedValue = slowCalculation(count);
 
 ----Inside Return
 
@@ -202,13 +194,13 @@ function Dashboard() {
         placeholder="Type here"
       />
 
-Fragment: 
+Fragment:
 <>
 </>
 
-14. Test 
-Open /dashboard
-Type in the input
+14. Test
+    Open /dashboard
+    Type in the input
 
 What happens?
 App feels slow / frozen
@@ -229,28 +221,27 @@ but not all calculations need to re-run
 This is exactly where useMemo helps.
 
 15. Fix it with useMemo
-Update import:
-To: 
-import { useContext, useState, useMemo } from "react";
+    Update import:
+    To:
+    import { useContext, useState, useMemo } from "react";
 
 16. Replace this line:
-From: 
-const calculatedValue = slowCalculation(count);
+    From:
+    const calculatedValue = slowCalculation(count);
 
-To: 
+To:
 const calculatedValue = useMemo(() => {
-  return slowCalculation(count);
+return slowCalculation(count);
 }, [count]);
 
-17. 
-slowCalculation runs only when count changes
-Typing in input no longer triggers it
-UI feels smooth
-[count] = dependency list
-→ “Recalculate only when count changes”
+17. slowCalculation runs only when count changes
+    Typing in input no longer triggers it
+    UI feels smooth
+    [count] = dependency list
+    → “Recalculate only when count changes”
 
 18. Test
-Expected Output: 
+    Expected Output:
 
 Type in input
 ✅ No freezing
@@ -261,9 +252,9 @@ Click “Increment Count”
 ⏳ UI updates with delay
 
 19. Without useMemo
-When text state changes
-✔ component renders
-✔ slow calculation runs
+    When text state changes
+    ✔ component renders
+    ✔ slow calculation runs
 
 With UseMemo
 
@@ -274,9 +265,9 @@ Means,
 ✔ component renders
 ❌ slow calculation does NOT run
 
-20. Optional, try another example: 
+20. Optional, another example:
 
-Add another slow function
+I have not used this now.
 
 ```
 
@@ -289,7 +280,7 @@ type CartItem = {
 
 function calculateCartTotal(items: CartItem[]) {
   console.log("Calculating cart total...");
-  
+
   // simulate heavier business logic
   let total = 0;
   for (let item of items) {
@@ -305,29 +296,27 @@ function calculateCartTotal(items: CartItem[]) {
 
 // --- Cart example states ---
 const [cartItems, setCartItems] = useState<CartItem[]>([
-  { id: 1, name: "Laptop", price: 50000, qty: 1 },
-  { id: 2, name: "Mouse", price: 500, qty: 2 },
-  { id: 3, name: "Keyboard", price: 1500, qty: 1 },
+{ id: 1, name: "Laptop", price: 50000, qty: 1 },
+{ id: 2, name: "Mouse", price: 500, qty: 2 },
+{ id: 3, name: "Keyboard", price: 1500, qty: 1 },
 ]);
 
 const [billingAddress, setBillingAddress] = useState("");
 
+---
 
------
-
-First without useMemo: 
+First without useMemo:
 
 const cartTotal = calculateCartTotal(cartItems);
 
 With useMemo:
 
 const cartTotal = useMemo(() => {
-  return calculateCartTotal(cartItems);
+return calculateCartTotal(cartItems);
 }, [cartItems]);
 
+---
 
-
------
 Add UI
 
 <hr className="my-6" />
@@ -337,53 +326,47 @@ Add UI
 <p className="mt-2">Cart Total: ₹ {cartTotal}</p>
 
 <button
-  onClick={() =>
-    setCartItems(items =>
-      items.map(i =>
-        i.id === 1 ? { ...i, qty: i.qty + 1 } : i
-      )
-    )
-  }
-  className="mt-2 bg-green-600 text-white px-4 py-2 rounded"
->
-  Add one more Laptop
-</button>
+onClick={() =>
+setCartItems(items =>
+items.map(i =>
+i.id === 1 ? { ...i, qty: i.qty + 1 } : i
+)
+)
+}
+className="mt-2 bg-green-600 text-white px-4 py-2 rounded"
+
+> Add one more Laptop
+> </button>
 
 <br /><br />
 
 <input
-  value={billingAddress}
-  onChange={(e) => setBillingAddress(e.target.value)}
-  placeholder="Type billing address"
-  className="border p-2 w-full"
+value={billingAddress}
+onChange={(e) => setBillingAddress(e.target.value)}
+placeholder="Type billing address"
+className="border p-2 w-full"
 />
 
-
-Test: 
+Test:
 
 Next with useMemo:
 
-Replace both calculation: 
+Replace both calculation:
 
 const calculatedValue = useMemo(() => {
-  return slowCalculation(count);
+return slowCalculation(count);
 }, [count]);
 
-
 const cartTotal = useMemo(() => {
-  return calculateCartTotal(cartItems);
+return calculateCartTotal(cartItems);
 }, [cartItems]);
 
+---
 
-------------------
-
-Test: 
-
-
+Test:
 
 useMemo caches the calculated cart total so it only recomputes when cartItems change, not when you type in the billing address.
 This keeps the UI responsive by skipping unnecessary recalculation during unrelated state updates.
-
 
 What does Render mean?
 

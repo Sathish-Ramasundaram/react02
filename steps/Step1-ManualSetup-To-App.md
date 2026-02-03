@@ -11,16 +11,16 @@
    shift + ctrl + `
 
 5. Initialize a Node.js project
-npm init -y
+   npm init -y
 
 6. Install React core libraries
-npm install react react-dom
+   npm install react react-dom
 
 7. Install TypeScript and React type definitions
-npm install -D typescript @types/react @types/react-dom
+   npm install -D typescript @types/react @types/react-dom
 
 8. Set up Rspack
-npm install -D @rspack/core @rspack/cli @rspack/dev-server @rspack/plugin-react-refresh react-refresh @rspack/plugin-html
+   npm install -D @rspack/core @rspack/cli @rspack/dev-server @rspack/plugin-react-refresh react-refresh @rspack/plugin-html
 
 Bundler (Rspack) → ready
 Dev server → ready
@@ -28,13 +28,13 @@ Fast refresh → ready
 HTML injection → ready
 
 9. Create the public folder
-mkdir public
+   mkdir public
 
 10. Create the src folder
-mkdir src
+    mkdir src
 
-11. Create the `index.html` file inside `public`  
-    
+11. Create the `index.html` file inside `public`
+
 type nul > public\index.html
 
 ```
@@ -53,9 +53,9 @@ type nul > public\index.html
 
 ```
 
-12. Create the `index.tsx` file inside `src`  
+12. Create the `index.tsx` file inside `src`
 
-    type nul > src\index.tsx
+type nul > src\index.tsx
 
 Paste code inside `src/index.tsx`
 
@@ -84,9 +84,8 @@ or null (if it doesn’t exist)
 So its type is:
 HTMLElement | null
 
-
 13. Create the Rspack configuration file in the root  
-type nul > rspack.config.js
+    type nul > rspack.config.js
 
 Paste code into `rspack.config.js`
 
@@ -172,7 +171,6 @@ start is conventionally used by CRA
 dev is clearer for custom setups
 Avoids confusion later when explaining
 
-
 - **A4** Production build  
   npm run build
 
@@ -191,16 +189,15 @@ Shift + Alt + F ---> Align the code
   You see
   Test from index.tsx
 
-  Note: 
+  Note:
   During development:
-npm run dev   ← use this daily
+  npm run dev ← use this daily
 
 Before deployment:
 npm run build ← only when needed
 
 - Stop the current process  
   ctrl + c
-
 
 - **A6** Create `App.tsx` inside `src`
   type nul > src\App.tsx
@@ -227,8 +224,6 @@ import App from "./App";
 root.render(
     <App />
 ```
-
-
 
 - **A9** Run development server again  
   npm run dev

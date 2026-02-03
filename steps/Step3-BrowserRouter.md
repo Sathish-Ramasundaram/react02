@@ -1,5 +1,5 @@
 - **A** Install `react-router-dom`  
-npm install react-router-dom
+  npm install react-router-dom
 
 npm → Node Package Manager
 install → install a package
@@ -10,12 +10,12 @@ Multiple pages in a single-page app (SPA)
 URL changes without full page reload
 Navigation like /login, /dashboard, /profile
 
-
 - **B13** BrowserRouter explanation  
-BrowserRouter is the component that enables routing in a React app.
-It allows your React app to change pages using URLs without reloading the page.
+  BrowserRouter is the component that enables routing in a React app.
+  It allows your React app to change pages using URLs without reloading the page.
 
-- **B14** Update `App.tsx` with BrowserRouter wrapper 
+- **B14** Update `App.tsx` with BrowserRouter wrapper
+
 ```
 
 import { BrowserRouter } from "react-router-dom";
@@ -33,8 +33,8 @@ import { BrowserRouter } from "react-router-dom";
 
 ```
 
-- Test: 
-No change. 
+- Test:
+  No change.
 
 Right now:
 You are not using routes yet
@@ -45,15 +45,15 @@ Think of it like this 🧠
 👉 Routes/Route = actual switches
 
 - **B14.B** Update `rspack.config.js` for history fallback  
-From: 
-devServer: {
+  From:
+  devServer: {
   port: 3000,
-},
+  },
 
-To: 
+To:
 devServer: {
-  port: 3000,
-  historyApiFallback: true,
+port: 3000,
+historyApiFallback: true,
 },
 
 ❌ Without historyApiFallback
@@ -63,14 +63,14 @@ Refresh /login → 404
 
 ✅ With historyApiFallback: true
 /
-/login -> if you donot have this page, it will go to main page. 
-/dashboard -> -> if you donot have this page, it will go to main page. 
+/login -> if you donot have this page, it will go to main page.
+/dashboard -> -> if you donot have this page, it will go to main page.
 Refresh anywhere → always works
 
-- **B15** Update `App.tsx` with Routes and Route  
+- **B15** Update `App.tsx` with Routes and Route
 
 ```
-update Import: 
+update Import:
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -92,8 +92,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
     </BrowserRouter>
 
 ```
+
 - **B16** Explanation of `<Routes>` and `<Route>`  
-<Routes> is a container for all your routes. Decision Maker
+  <Routes> is a container for all your routes. Decision Maker
 
 <Route> defines a mapping: If the URL matches this path, render something.
 
@@ -102,23 +103,22 @@ later: /register
 /forgot-password
 /dashboard
 
-Now, if you search other page, it will show blank page. 
+Now, if you search other page, it will show blank page.
 
-element={...} 
+element={...}
 element expects JSX. NOT a component name. NOT a string
 This are all valid
 element={<Home />}
 element={<h1>Hello</h1>}
 Here, we are rendering JSX directly — which is perfect for learning.
 
-You can try this, 
+You can try this,
 <Route path="/test" element={<h2>Test</h2>} />
 
 Test will appear in .../test
-If it is not coming, try save and run again. 
+If it is not coming, try save and run again.
 
-
-- **B18** Add Register route in `App.tsx`  
+- **B18** Add Register route in `App.tsx`
 
           <Route
             path="/register"
@@ -131,7 +131,7 @@ If it is not coming, try save and run again.
 
 ---
 
-- **B19** Add Forgot Password and Dashboard route in `App.tsx`  
+- **B19** Add Forgot Password and Dashboard route in `App.tsx`
 
 ```
 <Route
@@ -156,12 +156,11 @@ If it is not coming, try save and run again.
 
 ```
 
-- Test it. 
-
+- Test it.
 
 - **B21** Create pages folder inside src and `Login.tsx` (src/pages)
 
-mkdir src\pages   
+mkdir src\pages
 
 type nul > src\pages\Login.tsx
 
@@ -179,27 +178,27 @@ export default Login;
 
 ```
 
-- **B22** Update `App.tsx` to use Login page  
+- **B22** Update `App.tsx` to use Login page
 
 import Login from "./pages/Login";
 
 And
-From: 
+From:
 <Route
-  path="/"
-  element={
-    <h1 className="text-2xl font-bold text-green-600">
-      Home Route Working 
-    </h1>
-  }
+path="/"
+element={
+<h1 className="text-2xl font-bold text-green-600">
+Home Route Working
+</h1>
+}
 />
 
-To: 
+To:
 <Route path="/" element={<Login />} />
 
-- **B23** Test with `npm run dev`  
+- **B23** Test with `npm run dev`
 
-- **B24** create /pages/Register.tsx 
+- **B24** create /pages/Register.tsx
 
 type nul > src/pages/Register.tsx
 
@@ -217,15 +216,15 @@ export default Register;
 
 ```
 
-- **B25** Update `App.tsx` to use Register page  
+- **B25** Update `App.tsx` to use Register page
 
 import Register from "./pages/Register";
 
-replace with, 
+replace with,
 <Route path="/register" element={<Register />} />
 
-- **B26** create ForgotPassword.tsx inside src/pages/ and paste the below code 
-type nul >src/pages/ForgotPassword.tsx
+- **B26** create ForgotPassword.tsx inside src/pages/ and paste the below code
+  type nul >src/pages/ForgotPassword.tsx
 
 ```
 
@@ -240,9 +239,10 @@ function ForgotPassword() {
 export default ForgotPassword;
 
 ```
-- **B29** create Dashboard.tsx inside src/pages/ and paste the below code 
 
-type nul >src/pages/Dashboard.tsx  
+- **B29** create Dashboard.tsx inside src/pages/ and paste the below code
+
+type nul >src/pages/Dashboard.tsx
 
 ```
 
@@ -258,8 +258,7 @@ export default Dashboard;
 
 ```
 
-
-- **B27** Update `App.tsx` to use ForgotPassword page and Dashboard page 
+- **B27** Update `App.tsx` to use ForgotPassword page and Dashboard page
 
 import ForgotPassword from './pages/ForgotPassword';
 import Dashboard from './pages/Dashboard';
@@ -268,4 +267,4 @@ replace with:
 <Route path="/forgot-password" element={<ForgotPassword />} />
 <Route path="/dashboard" element={<Dashboard />} />
 
-- **B31** Test ForgotPassword and Dashboard route  
+- **B31** Test ForgotPassword and Dashboard route

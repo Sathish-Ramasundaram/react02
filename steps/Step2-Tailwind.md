@@ -1,6 +1,6 @@
 # Tailwind:
 
-1. 
+1.
 
 npm install -D tailwindcss@3.4.17 postcss autoprefixer
 npm install -D @tailwindcss/postcss
@@ -9,12 +9,11 @@ Install CSS loader dependencies
 npm install -D style-loader css-loader postcss-loader
 
 or
-Merged command: 
+Merged command:
 
 npm install -D tailwindcss@3.4.17 postcss autoprefixer @tailwindcss/postcss style-loader css-loader postcss-loader
 
-2. 
-type nul > tailwind.config.js
+2.  type nul > tailwind.config.js
 
 ```
 
@@ -31,9 +30,8 @@ module.exports = {
 
 ```
 
-3. 
-type nul > postcss.config.js
- 
+3.  type nul > postcss.config.js
+
 ```
 
 module.exports = {
@@ -45,10 +43,10 @@ module.exports = {
 
 ```
 
-4. 
-type nul > src/index.css
+4.  type nul > src/index.css
 
-- **B7** Paste Tailwind directives into `index.css`  
+- **B7** Paste Tailwind directives into `index.css`
+
 ```
 
 @tailwind base;
@@ -56,8 +54,8 @@ type nul > src/index.css
 @tailwind utilities;
 
 ```
-global entry point for all styles 
 
+global entry point for all styles
 
 Injects base styles + CSS reset
 Injects pre-built component styles
@@ -66,18 +64,17 @@ Injects utility classes
 base → components → utilities
 Utilities must override base & component styles
 
-6. 
-Update `index.tsx` to import CSS  
-``
+6.  Update `index.tsx` to import CSS  
+    ``
 
 import "./index.css";
 
 ``
 
-7. 
-Update `rspack.config.js` rules  
+7.  Update `rspack.config.js` rules
 
 existing module: rules propably look like this
+
 ```
 module: {
   rules: [
@@ -105,6 +102,7 @@ module: {
 ```
 
 update / Add css rule
+
 ```
 module: {
   rules: [
@@ -145,7 +143,7 @@ module: {
 
 ```
 
-8. 
+8.
 
 ```
 
@@ -193,4 +191,3 @@ text-2xl font-bold text-blue-600
 font-size: 1.5rem; / Makes text large
 font-weight: 700; / Makes text bold
 color: #2563eb;
-

@@ -161,6 +161,14 @@ Still:
 
 Just understand async → await → return value.
 
+Simple analogy
+
+Normal function:
+Cook instant noodles → done in 2 minutes → serve
+
+Async function:
+Order food online → wait → continue doing other work
+
 10. Open authApi.ts
 
 Replace code with this: 

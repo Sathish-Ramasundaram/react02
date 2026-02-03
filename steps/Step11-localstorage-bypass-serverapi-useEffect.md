@@ -212,7 +212,6 @@ Case 2: Incorrect credential - Error
 12. useEffect: 
 
 useEffect runs side-effects after render.
-
 Side-effects = things outside React rendering:
 
 API calls
@@ -388,11 +387,11 @@ Note:
 
 Add somewhere in JSX: (I have added in the div of auth status and logout button)
 
-{profile && (
-  <p className="mt-4">
-    Welcome {profile.name} — {profile.role}
-  </p>
-)}
+ {profile && (
+          <p className="mt-4">
+            Welcome {profile.name} ({profile.role})
+          </p>
+        )}
 
 25. Test: 
 
@@ -479,14 +478,3 @@ Should be:
 useEffect(() => {
   fetchData().then(setData);
 }, []); // ✅
-
-32. 
-33. 
-34. 
-35. 
-36. 
-37. 
-38. 
-39. 
-40. 
-

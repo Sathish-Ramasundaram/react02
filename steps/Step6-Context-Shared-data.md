@@ -1,16 +1,17 @@
 ## D1 Create AuthContext (NO LOGIC YET)
+
 Create a context file that:
 Exists
 Compiles
 Does NOTHING yet
 
-### D2 create new folder inside 
+### D2 create new folder inside
+
 mkdir src\context
 
 ### D4 create file src/context/AuthContext.tsx
-type nul >src/context/AuthContext.tsx
 
-paste this 
+type nul >src/context/AuthContext.tsx
 
 ```
 
@@ -22,7 +23,8 @@ export default AuthContext;
 
 ```
 
-### D11 Context creation 
+### D11 Context creation
+
 const AuthContext = createContext(null);
 What this is:
 It returns a Context object
@@ -66,10 +68,11 @@ createContext:
 A React function
 Used to create shared data storage
 
-ReactNode: 
+ReactNode:
 A TypeScript type
 Means: anything React can display on screen
 Examples of ReactNode:
+
 <div />
 <App />
 "Hello"
@@ -96,13 +99,13 @@ children: ReactNode;
 This component accepts something inside it, and that thing can be anything React can render.
 Example:
 <AuthProvider>
-  <App />
+<App />
 </AuthProvider>
 
 ### d17
 
 function AuthProvider(...)
-function 
+function
 
 { children }: AuthProviderProps
 This function receives props that contain children.
@@ -118,24 +121,23 @@ export default AuthContext;
 This allows other files to access the shared data box.
 
 ### d19
+
 1️⃣ AuthContext = shared data container
 2️⃣ AuthProvider = wrapper component
 3️⃣ children = what is inside the wrapper
 
------
+---
 
-- 1. 
-Goal: React should know whether a user is logged in or not, globally.
+- 1.  Goal: React should know whether a user is logged in or not, globally.
 
-change it to: 
-
+change it to:
 const AuthContext = createContext(false);
 
-Before	                After
-Context value = null	Context value = false
-Means “nothing”	        Means “not logged in”
+Before After
+Context value = null Context value = false
+Means “nothing” Means “not logged in”
 
-- 2. update Dashboard.tsx to: 
+- 2. update Dashboard.tsx to:
 
 ```
 
@@ -162,7 +164,7 @@ export default Dashboard;
 ```
 
 - 3. Test
-Expected Output: 
+     Expected Output:
 
 Auth Status:
 Logged Out
@@ -173,50 +175,36 @@ Dashboard Page Working from pages
 Add this in index.tsx
 import { AuthProvider } from "./context/AuthContext";
 
-To: 
+To:
 root.render(
-  <AuthProvider>
-    <App />
-  </AuthProvider>
+<AuthProvider>
+<App />
+</AuthProvider>
 
 It makes authentication data and logic available to the entire app without passing props manually.
-
-❌ Without AuthProvider
-You’d have to do prop drilling:
-<App isAuthenticated={isAuthenticated} />
-  → <Dashboard isAuthenticated={isAuthenticated} />
-      → <Header isAuthenticated={isAuthenticated} />
-      
-Messy. Hard to maintain. Painful to explain 😵‍💫
-
-✅ With AuthProvider
-<AuthProvider>
-  <App />
-</AuthProvider>
 
 - 5. update AuthContext.tsx
 
 function AuthProvider({ children }: AuthProviderProps) {
-  return (
-    <AuthContext.Provider value={false}>
-      {children}
-    </AuthContext.Provider>
-  );
+return (
+<AuthContext.Provider value={false}>
+{children}
+</AuthContext.Provider>
+);
 }
 
 Before, Dashboard → default value (false)
 Now, Dashboard → Provider value (false)
 Same result, different source.
 
-if the above one is null, you will see value in redcolor (Typescript) error. So, for now, we can make the above one as false. But, note the value is the source for this. 
+if the above one is null, you will see value in redcolor (Typescript) error. So, for now, we can make the above one as false. But, note the value is the source for this.
 
-- 6. 
-Goal to prove that Context is shared data by showing the same value on two different pages.
-Dashboard (already exists)
-News (we will add)
+- 6.  Goal to prove that Context is shared data by showing the same value on two different pages.
+      Dashboard (already exists)
+      News (we will add)
 
 - 7. Open new page
-type nul > src/pages/News.tsx 
+     type nul > src/pages/News.tsx
 
 Paste this
 
@@ -225,18 +213,19 @@ import AuthContext from "../context/AuthContext";
 
 function News() {
 
-  const isAuthenticated = useContext(AuthContext);
+const isAuthenticated = useContext(AuthContext);
 
-  return (
-    <div>
-      <h1>Auth Status:</h1>
-      <p>{isAuthenticated ? "Logged In" : "Logged Out"}</p>
+return (
+<div>
+<h1>Auth Status:</h1>
+<p>{isAuthenticated ? "Logged In" : "Logged Out"}</p>
 
       <h1 className="text-2xl font-bold text-purple-600">
         News Page Working
       </h1>
     </div>
-  );
+
+);
 }
 
 export default News;
@@ -250,6 +239,3 @@ And ---
 <Route path="/news" element={<News />} />
 
 9. Test. Auth Status is shared data and it is received by Dashboard and News.
-
-
-

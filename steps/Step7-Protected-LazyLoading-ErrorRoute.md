@@ -5,11 +5,11 @@ and they visit /dashboard
 👉 redirect them to /
 
 2. A protected route means:
-Route renders only if a condition is true
-Otherwise → redirect
-In React Router:
-We don’t “block URLs”
-We conditionally render elements
+   Route renders only if a condition is true
+   Otherwise → redirect
+   In React Router:
+   We don’t “block URLs”
+   We conditionally render elements
 
 3. create src/routes/ProtectedRoute.tsx
 
@@ -43,10 +43,9 @@ export default ProtectedRoute;
 
 Routes define which page loads for each URL. Links/Navigate/useNavigate are used to move between pages.
 
-
-4. Explanation: 
-children: ReactNode
-This allows usage like:
+4. Explanation:
+   children: ReactNode
+   This allows usage like:
 
 <ProtectedRoute>
   <Dashboard />
@@ -56,20 +55,22 @@ So ProtectedRoute does not render UI —
 it decides whether UI is allowed.
 
 5. Update App.tsx ------------
-----
-import ProtectedRoute from "./routes/ProtectedRoute";
+
 ---
+
+## import ProtectedRoute from "./routes/ProtectedRoute";
+
 update Dashboard route only:
 
-To: 
+To:
 
 <Route
-  path="/dashboard"
-  element={
-    <ProtectedRoute>
-      <Dashboard />
-    </ProtectedRoute>
-  }
+path="/dashboard"
+element={
+<ProtectedRoute>
+<Dashboard />
+</ProtectedRoute>
+}
 />
 
 6. Test
@@ -85,10 +86,10 @@ Dashboard does NOT render
 ✔ No hacks
 ✔ Real-world pattern
 
-7. Optional test. Change the value to True and check, it will open dashboard page. 
+7. Optional test. Change the value to True and check, it will open dashboard page.
 
-8. Goal: 
-Lazy Loading Routes
+8. Goal:
+   Lazy Loading Routes
 
 Load Dashboard code only when the user visits /dashboard
 Not at app startup.
@@ -105,22 +106,23 @@ React gives us two tools:
 React.lazy
 Suspense
 
-9. 
-We will:
-Convert Dashboard import to lazy
-Wrap it with <Suspense>
-Keep ProtectedRoute exactly as-is
+9.  We will:
+    Convert Dashboard import to lazy
+    Wrap it with <Suspense>
+    Keep ProtectedRoute exactly as-is
 
 10. update App.tsx
+
+I tried giving this lazy loading to News. Next time, I will use if it is working perfectly as expected.
 
 Remove this import
 ❌ import Dashboard from "./pages/Dashboard";
 
-Add this import 
+Add this import
 
 import { lazy, Suspense } from "react";
 
-Add this 
+Add this
 
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 
@@ -130,26 +132,26 @@ Loaded only when React renders it
 
 11. Wrap with <Suspense>
 
-update From: 
+update From:
 <Route
-  path="/dashboard"
-  element={
-    <ProtectedRoute>
-      <Dashboard />
-    </ProtectedRoute>
-  }
+path="/dashboard"
+element={
+<ProtectedRoute>
+<Dashboard />
+</ProtectedRoute>
+}
 />
 
-To: 
+To:
 <Route
-  path="/dashboard"
-  element={
-    <ProtectedRoute>
-      <Suspense fallback={<p>Loading Dashboard...</p>}>
-        <Dashboard />
-      </Suspense>
-    </ProtectedRoute>
-  }
+path="/dashboard"
+element={
+<ProtectedRoute>
+<Suspense fallback={<p>Loading Dashboard...</p>}>
+<Dashboard />
+</Suspense>
+</ProtectedRoute>
+}
 />
 
 React needs a fallback UI while loading.
@@ -162,7 +164,7 @@ So React says:
 “While waiting, what should I show?”
 That’s the fallback.
 
-12. Test: 
+12. Test:
 
 Run the app (make it true for login)
 Open /dashboard
@@ -187,32 +189,30 @@ heavy pages
 charts
 dashboards
 
-
-
 13. Error Route (404 – Not Found)
-If a user goes to:
-/random
-/abc
-/does-not-exist
+    If a user goes to:
+    /random
+    /abc
+    /does-not-exist
 
 They should see:
 404 – Page Not Found
 Instead of a blank screen (default)
 
 14. What we’ll do (minimal)
-Create a NotFound page
-Add a wildcard route *
-Add a link back to Login
+    Create a NotFound page
+    Add a wildcard route \*
+    Add a link back to Login
 
 ---
-path="*" → catch-all route
 
-This component is just a normal React component
-----
+path="\*" → catch-all route
+
+## This component is just a normal React component
 
 15. create src/pages/NotFound.tsx
 
-type nul > src\pages\NotFound.tsx 
+type nul > src\pages\NotFound.tsx
 
 ```
 
@@ -249,13 +249,13 @@ import NotFound from "./pages/NotFound";
 
 Add this route LAST inside <Routes>: This must come after all other routes.
 
-<Route path="*" element={<NotFound />} />
+<Route path="\*" element={<NotFound />} />
 
-17. Test: 
-Run app
-Open:
-/abc
-/something-random
+17. Test:
+    Run app
+    Open:
+    /abc
+    /something-random
 
 Expected:
 404 page shows
@@ -265,6 +265,5 @@ No page reload
 ✔ Error route works
 ✔ Router fallback works
 
-Eg: /abc will be reloaded. 
+Eg: /abc will be reloaded.
 In a React SPA, direct URL access or refresh causes a full page reload, but navigation via React Router links is handled client-side without reload
-
