@@ -23,17 +23,18 @@ export default AuthContext;
 
 ```
 
-### D11 Context creation
 
-const AuthContext = createContext(null);
-What this is:
-It returns a Context object
-NOT a component
-NOT a function you call in JSX
-👉 Used when:
-You want to share data, not UI
-So:
-Context = data channel
+You are importing a React function called createContext.
+createContext = global data box for React components
+
+You are creating a new context named AuthContext.
+What does (null) mean here?
+This is the default value of the context.
+If a component tries to read this context without a Provider, it will receive:
+null
+
+This allows other files to use this context: import AuthContext from "./AuthContext";
+
 
 ### D12 Create AuthProvider
 
@@ -94,6 +95,10 @@ So AuthProviderProps describes the shape of props.
 
 ### d16
 
+ReactNode = Anything React can render on screen
+It is a TypeScript type from React used to describe:
+“What can be displayed inside JSX”
+
 children: ReactNode;
 
 This component accepts something inside it, and that thing can be anything React can render.
@@ -117,7 +122,6 @@ export { AuthProvider };
 This allows other files to import and use the wrapper.
 
 export default AuthContext;
-
 This allows other files to access the shared data box.
 
 ### d19
@@ -183,6 +187,21 @@ root.render(
 
 It makes authentication data and logic available to the entire app without passing props manually.
 
+Without Context: 
+App
+ └── Dashboard
+      └── Header
+           └── Profile (needs user)
+
+With Context: 
+
+AuthProvider
+ └── App
+      └── Dashboard
+           └── Header
+                └── Profile → useContext()
+
+
 - 5. update AuthContext.tsx
 
 function AuthProvider({ children }: AuthProviderProps) {
@@ -208,6 +227,8 @@ if the above one is null, you will see value in redcolor (Typescript) error. So,
 
 Paste this
 
+```
+
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 
@@ -229,6 +250,8 @@ return (
 }
 
 export default News;
+
+```
 
 -- import News in App
 

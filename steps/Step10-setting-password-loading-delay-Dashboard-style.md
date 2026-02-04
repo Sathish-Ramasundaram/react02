@@ -35,14 +35,13 @@ setLoading(false);
 To:
 
 <button
-        type="submit"
-        disabled={loading}
-        className={`w-full py-2 rounded text-white
+type="submit"
+disabled={loading}
+className={`w-full py-2 rounded text-white
     ${loading ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'}
-  `}
-      >
-        {loading ? 'Logging in...' : 'Login'}
-      </button>
+  `} >
+{loading ? 'Logging in...' : 'Login'}
+</button>
 
 24. Test (important)
     Case 1 — Click Login
@@ -129,7 +128,7 @@ setIsSuccess(true); // ✅ mark success
 console.log("API result:", result);
 } catch (err: any) {
 setError(err.message);
-setIsSuccess(false); //      optional but safe
+setIsSuccess(false); // optional but safe
 } finally {
 setLoading(false);
 }
@@ -373,6 +372,7 @@ if (!auth) return null;
 const { isAuthenticated, logout } = auth;
 
 This line already exists and now becomes correct automatically:
+
 <p>{isAuthenticated ? 'Logged In' : 'Logged Out'}</p>
 No edit needed — now it uses real boolean.
 
@@ -427,10 +427,10 @@ Put this in main div
 
 <div className="w-full min-h-screen relative flex items-center justify-center">
 
-Create and use this div for counter
-
-<div className="bg-white p-6 rounded shadow w-96">
-
 create and use this div for auth
 
 <div className="absolute top-4 right-4 text-right">
+
+Create and use this div for counter
+
+<div className="bg-white p-6 rounded shadow w-96">

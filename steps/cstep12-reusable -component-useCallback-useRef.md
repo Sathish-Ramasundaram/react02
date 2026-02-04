@@ -146,13 +146,16 @@ useEffect(() => {
   console.log("Login component mounted");
 }, []);
 
-Add this below your mount effect:
 
 useEffect(() => {
   console.log("Email state changed:", email);
 }, [email]);
 
-Add this: 
+useEffect(() => {
+  console.log("password state changed:", password);
+}, [password]);
+
+
 useEffect(() => {
   return () => {
     console.log("Login component unmounted");
@@ -231,6 +234,8 @@ useCallback → memoize FUNCTIONS
 
 12. Add Child Demo Component (top of file, above Dashboard)
 
+import { useContext, useState, useMemo, useEffect, useCallback } from "react";
+
 Add this above function Dashboard():
 
 function ChildDemo({ onAction }: { onAction: () => void }) {
@@ -282,6 +287,8 @@ Both re-render right now — that’s expected.
 
 import React from "react";
 
+React is a default export, so we import it using import React from "react". Using { React } is incorrect because React is not a named export.
+
 
 From: 
 function ChildDemo({ onAction }: { onAction: () => void }) {
@@ -329,6 +336,7 @@ This is a very common real pattern.
 
 import { useRef } from "react";
 
+import { useContext, useState, useMemo, useEffect, useCallback, useRef } from "react";
 
 -----
 

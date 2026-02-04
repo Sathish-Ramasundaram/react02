@@ -64,6 +64,20 @@ Injects utility classes
 base → components → utilities
 Utilities must override base & component styles
 
+@tailwind utilities;
+This loads all utility classes — the core of Tailwind.
+Example:
+flex
+p-4
+text-center
+bg-red-500
+mt-2
+grid
+w-full
+This is what you mostly use in JSX:
+
+<div class="flex p-4 bg-blue-500 text-white">
+
 6.  Update `index.tsx` to import CSS  
     ``
 
@@ -76,6 +90,7 @@ import "./index.css";
 existing module: rules propably look like this
 
 ```
+
 module: {
   rules: [
     {

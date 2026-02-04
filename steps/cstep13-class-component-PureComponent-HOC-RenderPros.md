@@ -110,7 +110,7 @@ React.memo for class components
 10.
 
 Optional (Test)
-put this top of the render:
+put this top of the render: (inside ClassCounter.tsx)
 Like
 
 render() {
@@ -140,7 +140,6 @@ Component → wrapped → enhanced component
 Like adding a feature layer
 
 13. Create:
-    src/hoc/withAuthGuard.tsx
 
 mkdir src\hoc
 
@@ -167,7 +166,7 @@ export default withAuthGuard;
 
 ```
 
-14. Wrap Dashboard. I tried for News. Let's see if it is working well.
+14. Wrap Dashboard or any other . I tried for News. Let's see if it is working well.
 
 import withAuthGuard from "../hoc/withAuthGuard";
 
@@ -431,6 +430,8 @@ Updating as you interact.
 
 26. Before going furture, I have updated in index.tsx to:
     React.StrictMode
+
+import React from "react";
 
 <React.StrictMode>
 <ErrorBoundary>

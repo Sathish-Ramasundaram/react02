@@ -41,7 +41,12 @@ export default ProtectedRoute;
 
 ```
 
-Routes define which page loads for each URL. Links/Navigate/useNavigate are used to move between pages.
+Note:
+Link = user clicks to go somewhere
+Navigate = code sends user somewhere
+
+Routes define which page loads for each URL.
+Links/Navigate/useNavigate are used to move between pages.
 
 4. Explanation:
    children: ReactNode
@@ -56,9 +61,7 @@ it decides whether UI is allowed.
 
 5. Update App.tsx ------------
 
----
-
-## import ProtectedRoute from "./routes/ProtectedRoute";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 update Dashboard route only:
 
@@ -107,7 +110,7 @@ React.lazy
 Suspense
 
 9.  We will:
-    Convert Dashboard import to lazy
+    Convert News import to lazy
     Wrap it with <Suspense>
     Keep ProtectedRoute exactly as-is
 
@@ -116,7 +119,7 @@ Suspense
 I tried giving this lazy loading to News. Next time, I will use if it is working perfectly as expected.
 
 Remove this import
-❌ import Dashboard from "./pages/Dashboard";
+❌ import News from "./pages/News";
 
 Add this import
 
@@ -124,7 +127,7 @@ import { lazy, Suspense } from "react";
 
 Add this
 
-const Dashboard = lazy(() => import("./pages/Dashboard"));
+const News = lazy(() => import("./pages/News"));
 
 What this means:
 Dashboard code is split into a separate chunk
@@ -132,25 +135,13 @@ Loaded only when React renders it
 
 11. Wrap with <Suspense>
 
-update From:
+update To:
 <Route
-path="/dashboard"
+path="/news"
 element={
-<ProtectedRoute>
-<Dashboard />
-</ProtectedRoute>
-}
-/>
-
-To:
-<Route
-path="/dashboard"
-element={
-<ProtectedRoute>
-<Suspense fallback={<p>Loading Dashboard...</p>}>
-<Dashboard />
+<Suspense fallback={<p>Loading news...</p>}>
+<News />
 </Suspense>
-</ProtectedRoute>
 }
 />
 
@@ -166,15 +157,14 @@ That’s the fallback.
 
 12. Test:
 
-Run the app (make it true for login)
-Open /dashboard
+Run the app
+Open /news
 
 Observe:
-You briefly see Loading Dashboard...
-Then Dashboard appears
+You briefly see Loading news...
+Then news page appears
 
 ✔ Lazy loading works
-✔ Route protection still works
 ✔ No page reload
 
 ❌ Do NOT lazy load:
@@ -250,6 +240,8 @@ import NotFound from "./pages/NotFound";
 Add this route LAST inside <Routes>: This must come after all other routes.
 
 <Route path="\*" element={<NotFound />} />
+
+Note it is "\*" not \. It is coming after I press to save ctrl + S
 
 17. Test:
     Run app

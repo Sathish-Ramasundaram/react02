@@ -280,7 +280,7 @@ export async function loginApi(email: string, password: string) {
 }
 
 ```
-
+And update Login.tsx
 If email is NOT test@example.com → ❌ fail
 If it matches → ✅ success
 Simple, predictable.

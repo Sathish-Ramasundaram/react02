@@ -85,6 +85,13 @@ export default ErrorBoundary;
 
 ```
 
+Note: 
+import { Component, ReactNode } from "react";
+What is Component in React?
+Component is the base class for Class Components in React.
+
+It is used when you create React components using class syntax instead of function syntax.
+
 6. Wrap your App. Update index.tsx
 
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -150,7 +157,7 @@ See a wrong use case
 
 12. open Dashboard.tsx
 
-import { useContext, useState } from "react";
+import { useContext, useState, useMemo } from "react";
 
 Before Dashboard function: ------
 
@@ -221,9 +228,6 @@ but not all calculations need to re-run
 This is exactly where useMemo helps.
 
 15. Fix it with useMemo
-    Update import:
-    To:
-    import { useContext, useState, useMemo } from "react";
 
 16. Replace this line:
     From:
@@ -265,108 +269,6 @@ Means,
 ✔ component renders
 ❌ slow calculation does NOT run
 
-20. Optional, another example:
-
-I have not used this now.
-
-```
-
-type CartItem = {
-  id: number;
-  name: string;
-  price: number;
-  qty: number;
-};
-
-function calculateCartTotal(items: CartItem[]) {
-  console.log("Calculating cart total...");
-
-  // simulate heavier business logic
-  let total = 0;
-  for (let item of items) {
-    for (let i = 0; i < 500000; i++) {} // fake load 500000000
-    total += item.price * item.qty;
-  }
-
-  return total;
-}
-
-
-```
-
-// --- Cart example states ---
-const [cartItems, setCartItems] = useState<CartItem[]>([
-{ id: 1, name: "Laptop", price: 50000, qty: 1 },
-{ id: 2, name: "Mouse", price: 500, qty: 2 },
-{ id: 3, name: "Keyboard", price: 1500, qty: 1 },
-]);
-
-const [billingAddress, setBillingAddress] = useState("");
-
----
-
-First without useMemo:
-
-const cartTotal = calculateCartTotal(cartItems);
-
-With useMemo:
-
-const cartTotal = useMemo(() => {
-return calculateCartTotal(cartItems);
-}, [cartItems]);
-
----
-
-Add UI
-
-<hr className="my-6" />
-
-<h2 className="text-xl font-bold">Checkout Section (useMemo Real Example)</h2>
-
-<p className="mt-2">Cart Total: ₹ {cartTotal}</p>
-
-<button
-onClick={() =>
-setCartItems(items =>
-items.map(i =>
-i.id === 1 ? { ...i, qty: i.qty + 1 } : i
-)
-)
-}
-className="mt-2 bg-green-600 text-white px-4 py-2 rounded"
-
-> Add one more Laptop
-> </button>
-
-<br /><br />
-
-<input
-value={billingAddress}
-onChange={(e) => setBillingAddress(e.target.value)}
-placeholder="Type billing address"
-className="border p-2 w-full"
-/>
-
-Test:
-
-Next with useMemo:
-
-Replace both calculation:
-
-const calculatedValue = useMemo(() => {
-return slowCalculation(count);
-}, [count]);
-
-const cartTotal = useMemo(() => {
-return calculateCartTotal(cartItems);
-}, [cartItems]);
-
----
-
-Test:
-
-useMemo caches the calculated cart total so it only recomputes when cartItems change, not when you type in the billing address.
-This keeps the UI responsive by skipping unnecessary recalculation during unrelated state updates.
 
 What does Render mean?
 

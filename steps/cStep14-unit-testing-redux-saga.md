@@ -52,10 +52,6 @@ component behavior tests
 4. Start with:
    pure functions
 
-src/pages/slowCalculation.test.ts
-
-create slowCalculation.test.ts
-
 type nul > src\pages\slowCalculation.test.ts
 
 ```
@@ -63,7 +59,7 @@ type nul > src\pages\slowCalculation.test.ts
 import { slowCalculation } from "./Dashboard";
 
 test("slowCalculation multiplies correctly", () => {
-  expect(slowCalculation(2)).toBe(2000);
+  expect(slowCalculation(2)).toBe(2000000000);
 });
 
 ```
@@ -159,29 +155,6 @@ which lines ran
 which functions ran
 which files tested
 
-9. Run:
-
-npm test -- --coverage
-
-What You Will See
-Jest generates:
-
-coverage/
-├─ index.html
-
-Terminal shows:
-Statements %
-Branches %
-Functions %
-Lines %
-
-10. Step 2 — Open Visual Report
-
-Open:
-coverage/index.html
-
-coverage exist, but no index.html in it.
-
 update jest.config.js
 
 coverageReporters: ["text", "html"],
@@ -198,18 +171,31 @@ module.exports = {
 
 ```
 
-Run again:
+What You Will See
+Jest generates:
+
+coverage/
+├─ index.html
+
+Terminal shows:
+Statements %
+Branches %
+Functions %
+Lines %
+
+Run
 
 npm test -- --coverage
 
 It will generate coverage/index.html
+
+Step 2 — Open Visual Report
 
 Open index.html
 
 11. Redux - saga
 
 Redux-Saga handles async side-effects (API calls, delays, background tasks) using generator functions.
-
 Redux reducers must be pure — Saga handles the side effects outside reducers.
 
 install;
@@ -218,12 +204,10 @@ npm install redux react-redux redux-saga
 typescript types:
 npm install -D @types/react-redux
 
-12. 
-mkdir src\redux
-mkdir src\redux\news
+12. mkdir src\redux
+    mkdir src\redux\news
 
 create News Types
-src/redux/news/newsTypes.ts
 
 type nul > src\redux\news\newsTypes.ts
 
@@ -264,9 +248,8 @@ export const fetchNewsFailure = (error: string) => ({
 
 ```
 
-
 14. create src/redux/news/newsReducer.ts
-type nul > src\redux\news\newsReducer.ts
+    type nul > src\redux\news\newsReducer.ts
 
 ```
 
@@ -311,9 +294,9 @@ export default function newsReducer(
 ```
 
 15. Create Fake News API
-src/api/newsApi.ts
+    src/api/newsApi.ts
 
-type nul > src\api\newsApi.ts     
+type nul > src\api\newsApi.ts
 
 ```
 
@@ -332,7 +315,7 @@ export async function fetchNewsApi() {
 
 16. create src/redux/news/newsSaga.ts
 
-type nul > src\redux\news\newsSaga.ts   
+type nul > src\redux\news\newsSaga.ts
 
 ```
 
@@ -361,16 +344,14 @@ export function* newsSaga() {
 
 ```
 
-
 17. 👉 Redux-Saga Concepts used:
-call → call async function
-put → dispatch action
-takeLatest → only latest request runs
-
+    call → call async function
+    put → dispatch action
+    takeLatest → only latest request runs
 
 18. src/redux/rootSaga.ts
 
-type nul > src\redux\rootSaga.ts    
+type nul > src\redux\rootSaga.ts
 
 ```
 
@@ -385,6 +366,7 @@ export default function* rootSaga() {
 
 
 ```
+
 19. create src/redux/rootReducer.ts
 
 type nul > src\redux\rootReducer.ts
@@ -403,9 +385,10 @@ export type RootState = ReturnType<typeof rootReducer>;
 
 
 ```
+
 20. src/redux/store.ts
 
-type nul > src\redux\store.ts     
+type nul > src\redux\store.ts
 
 ```
 
@@ -427,28 +410,27 @@ export default store;
 
 
 ```
+
 21. update Index.tsx
 
 import { Provider } from "react-redux";
 import store from "./redux/store";
 
-
-Wrap App: 
+Wrap App:
 
 root.render(
-  <ErrorBoundary>
-    <Provider store={store}>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-    </Provider>
-  </ErrorBoundary>
+<ErrorBoundary>
+<Provider store={store}>
+<AuthProvider>
+<App />
+</AuthProvider>
+</Provider>
+</ErrorBoundary>
 );
 
-22. Create new page: 
+22. Create new page:
 
 src/pages/ReduxNewsPage.tsx
-
 
 type nul > src\pages\ReduxNewsPage.tsx
 
@@ -498,19 +480,20 @@ function ReduxNewsPage() {
 export default ReduxNewsPage;
 
 ```
-23. Add this in App 
+
+23. Add this in App
 
 import ReduxNewsPage from "./pages/ReduxNewsPage";
 
------------
+---
 
 <Route path="/redux-news" element={<ReduxNewsPage />} />
 
-----------
+---
 
-24.  Run: 
-npm run dev
-http://localhost:3000/redux-news
+24. Run:
+    npm run dev
+    http://localhost:3000/redux-news
 
 Click button:
 

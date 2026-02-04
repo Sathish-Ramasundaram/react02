@@ -103,7 +103,7 @@ later: /register
 /forgot-password
 /dashboard
 
-Now, if you search other page, it will show blank page.
+Now, if you search other page, it will show blank page. If not, ctrl + C and try again.
 
 element={...}
 element expects JSX. NOT a component name. NOT a string
@@ -187,6 +187,7 @@ From:
 <Route
 path="/"
 element={
+
 <h1 className="text-2xl font-bold text-green-600">
 Home Route Working
 </h1>
@@ -224,7 +225,8 @@ replace with,
 <Route path="/register" element={<Register />} />
 
 - **B26** create ForgotPassword.tsx inside src/pages/ and paste the below code
-  type nul >src/pages/ForgotPassword.tsx
+
+type nul >src/pages/ForgotPassword.tsx
 
 ```
 

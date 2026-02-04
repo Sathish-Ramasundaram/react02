@@ -356,7 +356,6 @@ export default Register;
 
 - **E12** Stop refresh and make Register email controlled
 
-Add submit handler, ----
 const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 event.preventDefault();
 console.log("Email:", email);
@@ -412,6 +411,8 @@ If error is empty (""), render nothing.
 This is how you show error messages only when they exist.
 
 Note: Make the email and password input required.
+
+
 
 - **E16** Test Register form validation  
   EXPECTED OUTPUT (TEST CAREFULLY)

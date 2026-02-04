@@ -184,7 +184,7 @@ React becomes the single source of truth.
   The input value comes from useState, and every keystroke updates that state.
 
 - **C10** Import `useState` in `Login.tsx`  
-  import { useState } from "react";
+import { useState } from "react";
 
 - **C11** Add email state with `useState`  
   inside the Login() function, add this one line:

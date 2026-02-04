@@ -1,5 +1,5 @@
 export async function fetchNewsApi() {
-  await new Promise((r) => setTimeout(r, 1500));
+  await new Promise((r) => setTimeout(r, 5000));
 
   return [
     "React 19 Released",

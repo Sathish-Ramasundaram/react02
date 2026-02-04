@@ -30,10 +30,7 @@ HTML injection → ready
 9. Create the public folder
    mkdir public
 
-10. Create the src folder
-    mkdir src
-
-11. Create the `index.html` file inside `public`
+10. Create the `index.html` file inside `public`
 
 type nul > public\index.html
 
@@ -52,6 +49,9 @@ type nul > public\index.html
 </html>
 
 ```
+
+11. Create the src folder
+    mkdir src
 
 12. Create the `index.tsx` file inside `src`
 
@@ -84,8 +84,9 @@ or null (if it doesn’t exist)
 So its type is:
 HTMLElement | null
 
-13. Create the Rspack configuration file in the root  
-    type nul > rspack.config.js
+13. Create the Rspack configuration file in the root
+
+type nul > rspack.config.js
 
 Paste code into `rspack.config.js`
 
@@ -181,8 +182,10 @@ dist/
 
 Shift + Alt + F ---> Align the code
 
-- **A5** Start development server  
-  npm run dev
+- **A5** Start development server
+
+npm run dev
+
 - development server is starting (20)
   Open:
   http://localhost:3000
