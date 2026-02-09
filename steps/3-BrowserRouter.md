@@ -217,12 +217,6 @@ export default Register;
 
 ```
 
-- **B25** Update `App.tsx` to use Register page
-
-import Register from "./pages/Register";
-
-replace with,
-<Route path="/register" element={<Register />} />
 
 - **B26** create ForgotPassword.tsx inside src/pages/ and paste the below code
 
@@ -260,12 +254,15 @@ export default Dashboard;
 
 ```
 
-- **B27** Update `App.tsx` to use ForgotPassword page and Dashboard page
+- **B27** Update `App.tsx` to use Register, ForgotPassword page and Dashboard page
 
+import Register from "./pages/Register";
 import ForgotPassword from './pages/ForgotPassword';
 import Dashboard from './pages/Dashboard';
 
 replace with:
+
+<Route path="/register" element={Register />} />
 <Route path="/forgot-password" element={<ForgotPassword />} />
 <Route path="/dashboard" element={<Dashboard />} />
 

@@ -262,3 +262,53 @@ root.render(
 ❌ Adds an extra <div> to the DOM
 
 ---
+
+import React from "react";
+
+To: 
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+
+----
+
+StrictMode is a development-only safety checker.
+It helps you:
+detect unsafe code
+find side-effect mistakes
+catch deprecated API usage
+warn about bad patterns
+prepare code for future React versions
+
+It does not affect production build.
+
+In development, React StrictMode will intentionally run some functions twice:
+- component render
+- useEffect setup
+- some lifecycle logic
+
+This is done to detect:
+side effects inside render
+missing cleanup
+unsafe mutations
+
+Don’t Panic About Double Logs
+You may see:
+console.log runs twice
+useEffect runs twice
+API called twice (dev only)
+
+This is expected in development with StrictMode.
+
+Production build runs normally once.
+
+Should I use it?
+Yes — recommended for all modern React projects.
+
+Especially useful for:
+learning React correctly
+avoiding subtle bugs
+future compatibility

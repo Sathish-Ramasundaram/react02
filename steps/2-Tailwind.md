@@ -13,7 +13,8 @@ Merged command:
 
 npm install -D tailwindcss@3.4.17 postcss autoprefixer @tailwindcss/postcss style-loader css-loader postcss-loader
 
-2.  type nul > tailwind.config.js
+2.  
+type nul > tailwind.config.js
 
 ```
 
@@ -64,7 +65,22 @@ Injects utility classes
 base → components → utilities
 Utilities must override base & component styles
 
-@tailwind utilities;
+--> Why base is needed
+
+Browsers apply different default styles:
+Chrome h1 ≠ Firefox h1 ≠ Safari h1
+Tailwind base makes them consistent.
+
+--> Why components layer exists
+Because sometimes writing 10 utilities repeatedly is messy:
+Instead of:
+bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600
+You create:
+btn-primary
+
+Reusable + clean.
+
+--> @tailwind utilities;
 This loads all utility classes — the core of Tailwind.
 Example:
 flex
@@ -153,6 +169,8 @@ module: {
     "postcss-loader",
   ],
 },
+
+
   ],
 },
 

@@ -328,22 +328,218 @@ newApi.ts
 await new Promise((r) => setTimeout(r, 5000));
 
 
-28.
-29.
-30.
-31.
-32.
-33.
-34.
-35.
-36.
-37.
-38.
-39.
-40.
-41.
-42.
-43.
+28. Test: 
+Click button 3 times quickly
+click
+click
+click
+
+within 1 second.
+
+you will see:
+
+WORKER STARTED
+WORKER STARTED
+WORKER STARTED
+
+BUT…
+Only ONE success result appears after 5 sec.
+
+29. What Just Happened (Plain Words)
+Because you used:
+takeLatest(FETCH_NEWS_REQUEST, worker)
+
+takeLatest =
+“Only keep the most recent request — cancel older ones”
+
+Used for:
+search typing
+refresh button
+filter changes
+reload data
+
+
+30. Tiny Change — Switch to takeEvery
+
+change import line to: 
+
+import { call, put, takeEvery } from "redux-saga/effects";
+
+change watcher to: 
+yield takeEvery(FETCH_NEWS_REQUEST, fetchNewsWorker);
+
+
+Make sure your API delay is still 5 seconds:
+
+Restart server
+Ctrl + C
+npm run dev
+
+31. Test: Click 3 times quickly. 
+
+What You Will See Now (takeEvery)
+
+Console:
+WORKER STARTED
+WORKER STARTED
+WORKER STARTED
+
+
+After ~5 seconds:
+SUCCESS
+SUCCESS
+SUCCESS
+
+You will see multiple completions.
+
+32. takeEvery - click click click
+ → run all
+ → no cancel
+ → 3 results
+
+33. takeEvery — background jobs
+
+Use for:
+logging
+analytics
+audit trails
+notifications
+fire-and-forget tasks
+
+34. throttle
+throttle = “Allow at most 1 action in X milliseconds”
+
+35. Replace with: 
+
+import { call, put, throttle } from "redux-saga/effects";
+
+
+From: 
+yield takeEvery(FETCH_NEWS_REQUEST, fetchNewsWorker);
+
+To: 
+yield throttle(3000, FETCH_NEWS_REQUEST, fetchNewsWorker);
+
+Keep API Delay Short (Optional)
+To keep demo clean, change API delay back to 2 seconds:
+
+36. Throttle allows the first action — then ignores the rest — until the time window ends.
+yield throttle(3000, FETCH_NEWS_REQUEST, fetchNewsWorker);
+
+It means:
+Allow only one worker run every 3 seconds
+
+Test: 
+Visual 
+0s   click → allowed
+1s   click → blocked
+2s   click → blocked
+3s   click → allowed
+
+
+Throttle does not queue blocked clicks.
+They are simply ignored.
+
+37. Race: 
+race = run two async tasks → whichever finishes first wins
+API call vs timeout
+
+We will make saga do:
+API call  vs  2-second timeout
+
+If API is slow → timeout wins → show error
+If API is fast → API wins → show data
+You will SEE it in console + UI.
+
+38. newsApi.ts
+Set delay to 5 seconds:
+
+newsSaga.ts
+Add race + delay
+
+import { call, put, race, delay, throttle } from "redux-saga/effects";
+
+
+Find this inside worker: 
+const data = yield call(fetchNewsApi);
+
+Replace with: 
+
+console.log("RACE: starting API vs timeout");
+
+const { data, timeout } = yield race({
+  data: call(fetchNewsApi),
+  timeout: delay(2000),
+});
+
+if (timeout) {
+  console.log("RACE: timeout won");
+  yield put(fetchNewsFailure("Request timed out"));
+  return;
+}
+
+console.log("RACE: API won");
+
+
+
+39. Test: 
+Console:
+RACE: starting API vs timeout
+RACE: timeout won
+
+
+UI:
+Request timed out
+
+40. Select
+
+select = saga reads data directly from Redux store
+useSelector → in React component
+select → in saga
+
+Goal of This Demo
+Before saga calls API, we will:
+👉 read current news count from Redux store
+👉 print it in console
+
+41. update: 
+To: 
+import { call, put, race, delay, throttle, select } from "redux-saga/effects";
+
+
+Inside your worker — at the TOP of try block — add this:
+const currentNews = yield select((state: any) => state.news.data);
+console.log("SELECT: news already in store =", currentNews.length);
+
+it comes: 
+function* fetchNewsWorker(): any {
+
+  try {
+
+    const currentNews = yield select((state: any) => state.news.data);
+    console.log("SELECT: news already in store =", currentNews.length);
+
+    console.log("RACE: starting API vs timeout");
+
+    const { data, timeout } = yield race({
+
+42. update newApi to 1sec
+
+now test: 
+
+First click
+Console:
+SELECT: news already in store = 0
+(because store empty)
+
+Second click (after success loaded)
+Console:
+SELECT: news already in store = 3
+
+(because reducer stored news)
+
+
+43. 
 44.
 45.
 46.

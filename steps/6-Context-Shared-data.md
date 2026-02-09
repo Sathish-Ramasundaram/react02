@@ -36,6 +36,69 @@ null
 This allows other files to use this context: import AuthContext from "./AuthContext";
 
 
+
+- 1.  Goal: React should know whether a user is logged in or not, globally.
+
+change it to:
+const AuthContext = createContext(false);
+
+Before After
+Context value = null Context value = false
+Means “nothing” Means “not logged in”
+
+- 2. update Dashboard.tsx to:
+
+```
+
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext";
+
+function Dashboard() {
+  const isAuthenticated = useContext(AuthContext);
+
+  return (
+    <div>
+      <h1>Auth Status:</h1>
+      <p>{isAuthenticated ? "Logged In" : "Logged Out"}</p>
+
+      <h1 className="text-2xl font-bold text-blue-600">
+        Dashboard Page Working from pages
+      </h1>
+    </div>
+  );
+}
+
+export default Dashboard;
+
+```
+
+
+Correct Pattern for Hooks
+
+General hook pattern:
+const variableName = hookFunction(argument)
+
+useContext
+A React hook that reads value from a Context.
+
+AuthContext
+This is the context object you imported.
+
+Example:
+import AuthContext from "./AuthContext";
+
+isAuthenticated
+This is just your local variable name — you choose it. It receives whatever value the context provides
+
+- 3. Test
+     Expected Output:
+
+Auth Status:
+Logged Out
+Dashboard Page Working from pages
+
+
+
 ### D12 Create AuthProvider
 
 -- Add AuthProvider function. Full updated code
@@ -54,9 +117,8 @@ function AuthProvider({ children }: AuthProviderProps) {
   return children;
 }
 
-export { AuthProvider };
-
-export default AuthContext;
+export { AuthProvider };   // wrapper component
+export default AuthContext; // actual context
 
 
 ```
@@ -131,48 +193,6 @@ This allows other files to access the shared data box.
 3️⃣ children = what is inside the wrapper
 
 ---
-
-- 1.  Goal: React should know whether a user is logged in or not, globally.
-
-change it to:
-const AuthContext = createContext(false);
-
-Before After
-Context value = null Context value = false
-Means “nothing” Means “not logged in”
-
-- 2. update Dashboard.tsx to:
-
-```
-
-import { useContext } from "react";
-import AuthContext from "../context/AuthContext";
-
-function Dashboard() {
-  const isAuthenticated = useContext(AuthContext);
-
-  return (
-    <div>
-      <h1>Auth Status:</h1>
-      <p>{isAuthenticated ? "Logged In" : "Logged Out"}</p>
-
-      <h1 className="text-2xl font-bold text-blue-600">
-        Dashboard Page Working from pages
-      </h1>
-    </div>
-  );
-}
-
-export default Dashboard;
-
-```
-
-- 3. Test
-     Expected Output:
-
-Auth Status:
-Logged Out
-Dashboard Page Working from pages
 
 - 4. Add AuthProvider
 
@@ -262,3 +282,13 @@ And ---
 <Route path="/news" element={<News />} />
 
 9. Test. Auth Status is shared data and it is received by Dashboard and News.
+
+-----
+
+Recommanded to update AuthContext:
+From: 
+const AuthContext = createContext(false);
+
+To: 
+const AuthContext = createContext<boolean | null>(null);
+

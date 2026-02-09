@@ -6,7 +6,6 @@ import {
 } from "./newsTypes";
 
 export const fetchNewsRequest = () => {
-  console.log("STEP1: Action creator called");
 
   return {
     type: FETCH_NEWS_REQUEST,
